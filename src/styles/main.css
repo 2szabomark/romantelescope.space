@@ -4,7 +4,9 @@
     --blue:#6fb3f2; --moon:#c9d2e8; --ok:#7ee2a8;
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{-webkit-tap-highlight-color:transparent}
+  button,.langbtn,nav a,.viewbtn,.dpitem,.hot,.soc a{touch-action:manipulation}
   html,body{margin:0;padding:0}
   body{
     background:var(--bg); color:var(--ink);
@@ -77,9 +79,15 @@
   .langbtn{background:transparent;color:var(--dim);border:1px solid transparent;border-radius:5px;padding:5px 8px;font:600 .8rem/1 "Space Grotesk",system-ui,sans-serif;cursor:pointer}
   .nav-in{padding-right:225px}
   @media(max-width:640px){
-    .langbtn{padding:4px 6px;font:600 .72rem/1 "Space Grotesk",system-ui,sans-serif}
-    .langs{top:5px;right:8px}
-    .nav-in{padding-right:185px}
+    /* the switcher joins the page flow above the title; the nav gets its full width back */
+    .langs{position:static;justify-content:flex-end;background:transparent;border:none;padding:14px 0 0;backdrop-filter:none;border-radius:0}
+    .langbtn{padding:8px 9px;font:600 .8rem/1 "Space Grotesk",system-ui,sans-serif}
+    .nav-in{padding-right:12px}
+    .hero{padding-top:16px}
+    nav::after{
+      content:"";position:absolute;top:0;right:0;bottom:1px;width:34px;pointer-events:none;
+      background:linear-gradient(90deg,rgba(7,11,24,0),rgba(7,11,24,.92));
+    }
   }
   .langbtn:hover{background:transparent;color:var(--ink);border-color:var(--line)}
   .langbtn.on,.langbtn.on:hover{color:var(--amber);border-color:rgba(255,180,84,.5);background:transparent}
@@ -178,6 +186,11 @@
   .steps .sub b{display:block;font-weight:600;margin-bottom:2px}
   .steps .sub .tag{color:var(--dim);font-weight:500;font-size:.76rem;border:1px solid var(--line);border-radius:4px;padding:1px 7px;margin-left:8px;white-space:nowrap;vertical-align:1px}
   .steps .sub span.x{color:var(--dim);font-size:.88rem;line-height:1.5;display:block}
+  @media (max-width:640px){
+    .steps summary{flex-wrap:wrap;row-gap:2px}
+    .steps summary span:first-child{flex:1 1 100%}
+    .steps .when{margin-left:0}
+  }
 
   /* svg text */
   .sl{fill:var(--dim);font-family:"Space Grotesk",system-ui,sans-serif;font-size:15px;font-weight:500}

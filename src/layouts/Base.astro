@@ -15,10 +15,15 @@ const SITE = "https://romantelescope.space";
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content={meta.description}>
+<meta name="theme-color" content="#070b18">
 <title>{meta.title}</title>
 <link rel="canonical" href={SITE + LANG_HREF[lang]}>
 {LANGS.map((l) => <link rel="alternate" hreflang={HTML_LANG[l]} href={SITE + LANG_HREF[l]} />)}
 <link rel="alternate" hreflang="x-default" href={SITE + "/"}>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">

@@ -7,6 +7,8 @@ import ANAT from "../data/anat.json";
 var $ = function (id) { return document.getElementById(id); };
 var NS = "http://www.w3.org/2000/svg";
 var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var mobMQ = window.matchMedia("(max-width: 640px)");
+var MOB = mobMQ.matches;
 
 var LANG = (document.documentElement.lang || "en").slice(0, 2);
 var LOCALES = { en: "en-US", de: "de-DE", es: "es-ES", zh: "zh-CN", hu: "hu-HU" };
@@ -122,26 +124,53 @@ function routeTick(d) {
 }
 
 // ---------- 2 first 91 minutes ----------
+// Horizontal timeline on wide screens; vertical (line on the left, labels to
+// the right) on phones, where the horizontal labels would overlap.
 var LNEV = [0, 7, 31, 70, 83];
-var lnX = function (min) { return 70 + 860 * (min / 91); };
+function lnPt(min) {
+  if (MOB) return { x: 80, y: 60 + 660 * (min / 91) };
+  return { x: 70 + 860 * (min / 91), y: 150 };
+}
 function lnBuild() {
+  var svg = $("lnSvg"), base = $("lnBase");
+  if (MOB) {
+    svg.setAttribute("viewBox", "0 0 500 780");
+    base.setAttribute("x1", 80); base.setAttribute("y1", 60);
+    base.setAttribute("x2", 80); base.setAttribute("y2", 720);
+  } else {
+    svg.setAttribute("viewBox", "0 0 1000 250");
+    base.setAttribute("x1", 70); base.setAttribute("y1", 150);
+    base.setAttribute("x2", 930); base.setAttribute("y2", 150);
+  }
   var g = $("lnEvents"); g.innerHTML = "";
   LNEV.forEach(function (mn, i) {
     var ev = [mn, T("ln" + (i + 1) + "_n"), T("ln" + (i + 1) + "_s")];
-    var x = lnX(ev[0]);
-    var up = i % 2 === 0;
-    makeEl("line", { x1: x, x2: x, y1: up ? 150 : 150, y2: up ? 108 : 192, stroke: "#3a4877", "stroke-width": 1.4 }, g);
-    var grp = makeEl("g", { "class": "lnev", id: "lnev" + i, opacity: 0.35 }, g);
-    makeEl("circle", { cx: x, cy: 150, r: 5, fill: "#ffb454" }, grp);
-    var t1 = makeEl("text", { x: x, y: up ? 92 : 216, "text-anchor": "middle", "class": "sl sl-strong" }, grp);
-    t1.textContent = "T+" + ev[0] + " min — " + ev[1];
-    var t2 = makeEl("text", { x: x, y: up ? 70 : 238, "text-anchor": "middle", "class": "sl" }, grp);
-    t2.textContent = ev[2];
+    var p = lnPt(ev[0]);
+    var grp;
+    if (MOB) {
+      makeEl("line", { x1: p.x, x2: p.x + 24, y1: p.y, y2: p.y, stroke: "#3a4877", "stroke-width": 1.4 }, g);
+      grp = makeEl("g", { "class": "lnev", id: "lnev" + i, opacity: 0.35 }, g);
+      makeEl("circle", { cx: p.x, cy: p.y, r: 6, fill: "#ffb454" }, grp);
+      var m1 = makeEl("text", { x: p.x + 34, y: p.y + 1, "text-anchor": "start", "class": "sl sl-strong" }, grp);
+      m1.textContent = "T+" + ev[0] + " min — " + ev[1];
+      var m2 = makeEl("text", { x: p.x + 34, y: p.y + 25, "text-anchor": "start", "class": "sl" }, grp);
+      m2.textContent = ev[2];
+    } else {
+      var up = i % 2 === 0;
+      makeEl("line", { x1: p.x, x2: p.x, y1: 150, y2: up ? 108 : 192, stroke: "#3a4877", "stroke-width": 1.4 }, g);
+      grp = makeEl("g", { "class": "lnev", id: "lnev" + i, opacity: 0.35 }, g);
+      makeEl("circle", { cx: p.x, cy: 150, r: 5, fill: "#ffb454" }, grp);
+      var t1 = makeEl("text", { x: p.x, y: up ? 92 : 216, "text-anchor": "middle", "class": "sl sl-strong" }, grp);
+      t1.textContent = "T+" + ev[0] + " min — " + ev[1];
+      var t2 = makeEl("text", { x: p.x, y: up ? 70 : 238, "text-anchor": "middle", "class": "sl" }, grp);
+      t2.textContent = ev[2];
+    }
   });
 }
 function lnSet(p) { // p: 0..1 over 91 min
   var m = p * 91;
-  $("lnMarker").setAttribute("transform", "translate(" + lnX(m).toFixed(1) + ",150)");
+  var pt = lnPt(m);
+  $("lnMarker").setAttribute("transform", "translate(" + pt.x.toFixed(1) + "," + pt.y.toFixed(1) + ")");
   LNEV.forEach(function (mn, i) {
     $("lnev" + i).setAttribute("opacity", m >= mn - 0.01 ? 1 : 0.35);
   });
@@ -394,13 +423,17 @@ function ldX(kmv) {
 }
 function ldBuildRungs() {
   var g = $("ldRungs"); g.innerHTML = "";
-  [[400, "ISS"], [35786, T("hf_tv")], [MOONKM, T("hf_moon")], [L2KM, "L2"]].forEach(function (r) {
+  [[400, "ISS"], [35786, T("hf_tv")], [MOONKM, T("hf_moon")], [L2KM, "L2"]].forEach(function (r, i) {
     var x = ldX(r[0]);
-    makeEl("line", { x1: x, x2: x, y1: 118, y2: 142, stroke: "#94a1c7", "stroke-width": 1.4 }, g);
-    var t = makeEl("text", { x: x, y: 172, "text-anchor": "middle", "class": "sl sl-strong" }, g);
+    // on phones the neighbouring labels collide: stagger names, drop the km values
+    var yName = MOB ? (i % 2 === 0 ? 172 : 208) : 172;
+    makeEl("line", { x1: x, x2: x, y1: 118, y2: MOB && i % 2 === 1 ? 196 : 142, stroke: "#94a1c7", "stroke-width": 1.4, opacity: MOB && i % 2 === 1 ? 0.5 : 1 }, g);
+    var t = makeEl("text", { x: x, y: yName, "text-anchor": "middle", "class": "sl sl-strong" }, g);
     t.textContent = r[1];
-    var t2 = makeEl("text", { x: x, y: 196, "text-anchor": "middle", "class": "sl" }, g);
-    t2.textContent = fmt(r[0]) + " km";
+    if (!MOB) {
+      var t2 = makeEl("text", { x: x, y: 196, "text-anchor": "middle", "class": "sl" }, g);
+      t2.textContent = fmt(r[0]) + " km";
+    }
   });
 }
 function ladderTick(d) {
@@ -429,11 +462,12 @@ function spBuild() {
     var v = i * 2000, y = spY(v);
     makeEl("line", { x1: SPX0, x2: SPX1, y1: y, y2: y, stroke: "#20294b", "stroke-width": 1 }, g);
     var t = makeEl("text", { x: SPX0 - 8, y: y + 5, "text-anchor": "end", "class": "sl" }, g);
-    t.textContent = fmt(v);
+    // compact "8k" labels on phones — the full numbers clip off the left edge
+    t.textContent = MOB ? (v === 0 ? "0" : (v / 1000) + "k") : fmt(v);
   }
   var unit = makeEl("text", { x: SPX0 - 8, y: spY(8000) + 24, "text-anchor": "end", "class": "sl" }, g);
   unit.textContent = T("sp_unit");
-  for (i = 0; i <= 90; i += 15) {
+  for (i = 0; i <= 90; i += (MOB ? 30 : 15)) {
     var x = spX(i);
     makeEl("line", { x1: x, x2: x, y1: SPY0, y2: SPY0 + 6, stroke: "#94a1c7", "stroke-width": 1.2 }, g);
     var tt = makeEl("text", { x: x, y: SPY0 + 27, "text-anchor": "middle", "class": "sl" }, g);
@@ -586,6 +620,14 @@ dsnTick();
 setInterval(dsnTick, 30000);
 tickHero();
 setInterval(tickHero, 1000);
+
+// relayout the responsive SVGs when crossing the phone breakpoint
+if (mobMQ.addEventListener) {
+  mobMQ.addEventListener("change", function (e) {
+    MOB = e.matches;
+    lnBuild(); lnSet(1); ldBuildRungs(); spBuild(); tickHero();
+  });
+}
 
 // warm the render cache so hover/view swaps don't flicker on first use
 // (the images were inline data URIs in the monolith, so swaps were instant)

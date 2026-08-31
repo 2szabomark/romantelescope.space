@@ -1,5 +1,13 @@
 <div class="wrap">
 
+  <span class="langs" role="group" aria-label="Language">
+    <a class="langbtn" data-lang="en" href="/">EN</a>
+    <a class="langbtn" data-lang="hu" href="/hu/">HU</a>
+    <a class="langbtn" data-lang="de" href="/de/">DE</a>
+    <a class="langbtn" data-lang="es" href="/es/">ES</a>
+    <a class="langbtn" data-lang="zh" href="/zh/">中文</a>
+  </span>
+
   <!-- ================= HERO ================= -->
   <header class="hero">
     <h1>Roman, step by step</h1>
@@ -65,13 +73,6 @@
     <a href="#next">What's next</a>
     <a href="#socials">Follow</a>
   </div></nav>
-  <span class="langs" role="group" aria-label="Language">
-    <a class="langbtn" data-lang="en" href="/">EN</a>
-    <a class="langbtn" data-lang="hu" href="/hu/">HU</a>
-    <a class="langbtn" data-lang="de" href="/de/">DE</a>
-    <a class="langbtn" data-lang="es" href="/es/">ES</a>
-    <a class="langbtn" data-lang="zh" href="/zh/">中文</a>
-  </span>
 
   <!-- ================= 1 ROUTE ================= -->
   <section class="mod" id="route">
@@ -117,8 +118,8 @@
   <section class="mod" id="launch">
     <div class="mod-head"><h2>What happened in the first 91 minutes?</h2><span class="chip done">complete</span></div>
     <p class="lead">The whole opening act, minute by minute — every event below is <b>confirmed by NASA</b>.</p>
-    <figure><svg viewBox="0 0 1000 250" role="img" aria-label="Timeline of the first 91 minutes of flight">
-      <line x1="70" y1="150" x2="930" y2="150" stroke="#20294b" stroke-width="2"/>
+    <figure><svg id="lnSvg" viewBox="0 0 1000 250" role="img" aria-label="Timeline of the first 91 minutes of flight">
+      <line id="lnBase" x1="70" y1="150" x2="930" y2="150" stroke="#20294b" stroke-width="2"/>
       <g id="lnEvents"></g>
       <g id="lnMarker" transform="translate(70,150)">
         <circle r="7" fill="#ffb454"/>
