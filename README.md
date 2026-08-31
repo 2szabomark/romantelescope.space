@@ -30,7 +30,12 @@ Each language ships as real static HTML (`/`, `/hu/`, `/de/`, `/es/`, `/zh/`) wi
 - Deploy command: `npx wrangler deploy`
 - `wrangler.jsonc` serves `dist/` as static assets — its `name` must match the Worker's name.
 
-## Updating the deployment board
+## Mission stages
 
-Confirmed deployments are hardcoded: flip `done:true` in `DEPLOYS` in `src/scripts/app.js`
-and adjust the `d1..d5` strings in `src/i18n/runtime.*.json`, then push.
+Everything that can honestly follow the launch clock switches automatically
+(hero day line, section chips, "expected any day" deploy labels, roadmap
+accordion, days-on-station counter). Milestones that need NASA's word are
+manual: flip the matching flag in `CONFIRMED` at the top of
+`src/scripts/app.js` when the mission blog confirms it, then push —
+every affected module (deploy board, camera section, arrival state)
+updates from that one flag. Planned timings live next to it in `PLAN`.

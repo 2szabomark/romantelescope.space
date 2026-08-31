@@ -24,6 +24,25 @@ var C_KM_S = 299792;
 function eDays(msOffset) {
   return Math.max(0, (Date.now() - (msOffset || 0) - LAUNCH) / DAY);
 }
+
+// ---------- mission stages ----------
+// Everything that can honestly follow the launch clock switches automatically.
+// Milestones that need NASA's word stay manual: flip a flag here when the
+// mission blog confirms it, and every affected module updates on its own.
+var CONFIRMED = {
+  hga: false,        // high-gain antenna deployed        (deploy board item 3)
+  cover: false,      // aperture cover open               (deploy board item 4)
+  cgi: false,        // coronagraph powered on            (deploy board item 5)
+  wfiActive: false,  // Wide Field Instrument switched on (camera section)
+  arrived: false,    // halo-orbit insertion confirmed
+  firstImages: false // first public images released
+};
+var PLAN = {
+  deployWindow: 7,   // "within days" — after this the remaining deploys show "expected any day"
+  camWake: 21,       // NASA: WFI activates a few weeks in — chip switches to "activation window"
+  arrive: 90         // ~90-day cruise
+};
+function onStation(d) { return CONFIRMED.arrived || d >= PLAN.arrive; }
 function frac(d) { if (d <= 0) return 0; return (1 - Math.exp(-Math.min(d, CRUISE) / TAU)) / NORM; }
 function km(d) { return L2KM * frac(d); }
 var ASC = 45 / 1440;      // ~45-minute powered ascent, modeled
@@ -79,7 +98,9 @@ function tickHero() {
   $("stSpeed").innerHTML = fmt(sp) + "<small> km/h</small>";
   $("stSpeedD").textContent = fmt(sp - spAgo) + " km/h";
   $("stPct").innerHTML = (frac(d) * 100).toFixed(1) + "<small> %</small>";
-  $("stDayLine").innerHTML = T("day_line", { d: Math.max(1, Math.ceil(d)) });
+  $("stDayLine").innerHTML = onStation(d)
+    ? T("day_line_station", { d: Math.max(1, Math.ceil(d)) })
+    : T("day_line", { d: Math.max(1, Math.ceil(d)) });
 
   var ms = Math.max(0, Date.now() - LAUNCH);
   var dd = Math.floor(ms / DAY), hh = Math.floor(ms % DAY / 3600000),
@@ -91,7 +112,9 @@ function tickHero() {
   routeTick(d); ladderTick(d); speedTick(d);
   $("cmpMoonX").textContent = (km(d) / MOONKM).toFixed(2) + "×";
   $("cmpEarthLaps").textContent = (km(d) / 40075).toFixed(1) + "×";
-  $("nxDays").textContent = Math.max(0, Math.round(CRUISE - d)) + "";
+  $("nxDays").textContent = onStation(d)
+    ? Math.max(0, Math.round(d - PLAN.arrive)) + ""
+    : Math.max(0, Math.round(CRUISE - d)) + "";
 }
 
 // ---------- 1 route ----------
@@ -291,13 +314,16 @@ function anatSelect(s, fromChip) {
 })();
 
 // ---------- 4 deployment board (NASA renders) ----------
+// conf names the CONFIRMED flag that marks the item deployed ("always" =
+// confirmed on launch day). Flip the flag up top; the board follows.
 var DEPLOYS = [
-  { k: "sass", view: "right", done: true,  id: "d1" },
-  { k: "sass", view: "right", done: true,  id: "d2" },
-  { k: "com",  view: "right", done: false, id: "d3" },
-  { k: "tel",  view: "right", done: false, id: "d4" },
-  { k: "cgi",  view: "left",  done: false, id: "d5" }
+  { k: "sass", view: "right", conf: "always", id: "d1" },
+  { k: "sass", view: "right", conf: "always", id: "d2" },
+  { k: "com",  view: "right", conf: "hga",    id: "d3" },
+  { k: "tel",  view: "right", conf: "cover",  id: "d4" },
+  { k: "cgi",  view: "left",  conf: "cgi",    id: "d5" }
 ];
+function dpDone(it) { return it.conf === "always" || !!CONFIRMED[it.conf]; }
 var dpCur = 0;
 function dpFrame(viewKey, s) {
   var v = null;
@@ -312,17 +338,18 @@ function dpShow(idx) {
   var btns = document.querySelectorAll(".dpitem");
   for (var i = 0; i < btns.length; i++) btns[i].classList.toggle("on", i === idx);
   $("dpImg").setAttribute("src", dpFrame(it.view, it.k));
-  $("dpCap").innerHTML = "<b>" + T(it.id + "_n") + "</b> — " +
-    (it.done ? T("dp_open") : T("dp_exp", { w: T(it.id + "_w") }));
+  var dpStatus = dpDone(it) ? T("dp_open")
+    : (eDays() > PLAN.deployWindow ? T("dp_wait") : T("dp_exp", { w: T(it.id + "_w") }));
+  $("dpCap").innerHTML = "<b>" + T(it.id + "_n") + "</b> — " + dpStatus;
 }
 function dpBuild() {
   var list = $("dpList"); list.innerHTML = "";
   DEPLOYS.forEach(function (it, i) {
     var b = document.createElement("button");
-    b.className = "dpitem" + (it.done ? " done" : "");
+    b.className = "dpitem" + (dpDone(it) ? " done" : "");
     b.setAttribute("type", "button");
     b.innerHTML = "<span class=\"dot\"></span><span class=\"dtxt\"><b>" + T(it.id + "_n") + "</b><small>" +
-      T(it.id + "_w") + " — " + (it.done ? T("dp_done") : T("dp_up")) + "</small><em>" + T(it.id + "_x") + "</em></span>";
+      T(it.id + "_w") + " — " + (dpDone(it) ? T("dp_done") : T("dp_up")) + "</small><em>" + T(it.id + "_x") + "</em></span>";
     b.addEventListener("click", function () { dpShow(i); });
     list.appendChild(b);
   });
@@ -604,6 +631,40 @@ if (!reduced && "IntersectionObserver" in window) {
   pingLoop(0);
 })();
 
+// ---------- stage switching ----------
+// Re-applied every few minutes so a tab left open crosses stage boundaries
+// on its own; the accordion is only steered once, at boot, so it never
+// fights the reader.
+function setChip(sectionId, text, cls) {
+  var c = document.querySelector("#" + sectionId + " .chip");
+  if (!c) return;
+  c.textContent = text;
+  c.className = "chip" + (cls ? " " + cls : "");
+}
+function applyStage() {
+  var d = eDays();
+  var station = onStation(d);
+  if (station) {
+    setChip("route", T("chip_arrived"), "done");
+    setChip("next", T("chip_arrived"), "done");
+    var sp = document.querySelector('#next [data-i="nx_c1"]');
+    if (sp) sp.innerHTML = T("nx_c1_arr");
+  }
+  if (DEPLOYS.every(dpDone)) setChip("deploys", T("chip_complete"), "done");
+  if (CONFIRMED.wfiActive) setChip("camera", T("cam_on"), "live");
+  else if (d >= PLAN.camWake) setChip("camera", T("cam_soon"), "");
+  if (CONFIRMED.wfiActive) fpSet(18);
+}
+function applyStageBoot() {
+  // open the roadmap phase we are actually in (phase windows in mission days)
+  var d = eDays();
+  var ph = d < 7 ? 0 : d < 35 ? 1 : d < 84 ? 2 : d < 97 ? 3 : 4;
+  document.querySelectorAll("#next .steps details").forEach(function (el, i) {
+    if (i === ph) el.setAttribute("open", "");
+    else el.removeAttribute("open");
+  });
+}
+
 // ---------- boot (was applyLang in the monolith) ----------
 fpSet(0);
 rtBuildTicks(); lnBuild(); lnSet(1); ldBuildRungs(); spBuild();
@@ -612,6 +673,9 @@ anatSetView("right");
 anatSelect("tel", false);
 dsnTick();
 setInterval(dsnTick, 30000);
+applyStageBoot();
+applyStage();
+setInterval(applyStage, 600000);
 tickHero();
 setInterval(tickHero, 1000);
 

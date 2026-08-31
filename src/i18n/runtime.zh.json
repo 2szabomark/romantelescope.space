@@ -73,5 +73,12 @@
  "dp_open": "已确认展开",
  "dp_exp": "预计{w}",
  "dp_done": "已展开",
- "dp_up": "待进行"
+ "dp_up": "待进行",
+ "chip_complete": "已完成",
+ "chip_arrived": "已抵达 L2",
+ "day_line_station": "▪ 已驻留 L2 — 任务第 <b>{d}</b> 天",
+ "dp_wait": "随时可能完成——确认消息会最先发布在任务博客",
+ "cam_soon": "激活窗口——按 NASA 计划",
+ "cam_on": "相机已激活",
+ "nx_c1_arr": "天驻留在 L2——约 11 月底抵达"
 }

@@ -73,5 +73,12 @@
  "dp_open": "megerősítve nyitva",
  "dp_exp": "várható: {w}",
  "dp_done": "kinyílt",
- "dp_up": "következik"
+ "dp_up": "következik",
+ "chip_complete": "lezajlott",
+ "chip_arrived": "megérkezett az L2-höz",
+ "day_line_station": "▪ állomáshelyén az L2-nél — a küldetés <b>{d}.</b> napja",
+ "dp_wait": "bármelyik nap várható — a megerősítés először a küldetésblogon jelenik meg",
+ "cam_soon": "aktiválási időszak — a NASA terve szerint",
+ "cam_on": "a kamera aktív",
+ "nx_c1_arr": "napja állomásozik az L2-nél — érkezés november vége körül"
 }

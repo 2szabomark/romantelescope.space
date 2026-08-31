@@ -73,5 +73,12 @@
  "dp_open": "confirmado abierto",
  "dp_exp": "previsto {w}",
  "dp_done": "desplegado",
- "dp_up": "pendiente"
+ "dp_up": "pendiente",
+ "chip_complete": "completado",
+ "chip_arrived": "llegó a L2",
+ "day_line_station": "▪ en su puesto en L2 — día <b>{d}</b> de la misión",
+ "dp_wait": "se espera cualquier día — las confirmaciones aparecen primero en el blog de la misión",
+ "cam_soon": "ventana de activación — según el plan de la NASA",
+ "cam_on": "cámara activa",
+ "nx_c1_arr": "días en su puesto en L2 — llegó a finales de noviembre"
 }
