@@ -234,9 +234,11 @@
   <!-- ================= 6 HOW FAR ================= -->
   <section class="mod" id="howfar">
     <div class="mod-head"><h2>How far is far?</h2><span class="chip live">live estimate</span></div>
-    <p class="lead">Each rung of this ladder is roughly <b>ten times farther</b> than the one before it — that's the only way ISS and L2 fit in one picture. Watch Roman climb past them.</p>
-    <figure><svg viewBox="0 0 1000 240" role="img" aria-label="Logarithmic distance ladder from Earth orbit to L2">
+    <p class="lead">This strip is <b>true to scale</b>: the full journey is 1.5 million km, and every distance sits exactly where it belongs. Everything we usually call &ldquo;space&rdquo; — the ISS, even TV satellites — is squeezed against the left edge. Watch how far Roman has already pulled away.</p>
+    <figure><svg viewBox="0 0 1000 240" role="img" aria-label="True-to-scale distance line from Earth to L2">
       <line x1="70" y1="130" x2="930" y2="130" stroke="#20294b" stroke-width="2"/>
+      <circle cx="70" cy="130" r="7" fill="url(#eg)"><title>Earth</title></circle>
+      <text class="sl" x="62" y="104" text-anchor="start" id="svgEarthLd">Earth</text>
       <g id="ldRungs"></g>
       <g id="ldCraft" transform="translate(70,130)">
         <circle r="11" fill="#ffb454" opacity="0.18"/>
@@ -244,7 +246,7 @@
         <text class="sl sl-amber" id="ldCraftLbl" x="0" y="-46" text-anchor="middle">Roman</text>
       </g>
     </svg></figure>
-    <p class="howto">How to read it: satellites you use daily live at the far left. Roman left the Moon's rung behind and won't stop until L2.</p>
+    <p class="howto">How to read it: <b>distances are to scale</b> — the same stretch of line means the same number of km everywhere. The satellites you use daily sit pressed against Earth at the far left. Roman left the Moon behind and won't stop until L2.</p>
     <ul class="compare">
       <li><b id="ldGeoX">—</b><span data-i="hf_c1">times higher than TV satellites right now</span></li>
       <li><b id="ldRemain">—</b><span data-i="hf_c2">km still to go</span></li>

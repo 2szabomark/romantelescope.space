@@ -40,6 +40,7 @@ const MAP = [
   ["#listening h2", "ds_h2"], ["#listening .chip", "chip_estl"], ["#listening .lead", "ds_lead"], ["#listening .howto", "ds_howto"],
   ["#svgDsnEarth", "ds_earth"],
   ["#howfar h2", "hf_h2"], ["#howfar .chip", "chip_live2"], ["#howfar .lead", "hf_lead"], ["#howfar .howto", "hf_howto"],
+  ["#svgEarthLd", "w_earth"],
   ["#speed h2", "sp_h2"], ["#speed .chip", "chip_model"], ["#speed .lead", "sp_lead"], ["#speed .howto", "sp_howto"],
   ["#camera h2", "cam_h2"], ["#camera .chip", "chip_wakes"], ["#camera .lead", "cam_lead"],
   ["#fpPlay", "cam_btn"], ["#camera .btnnote", "cam_note"], ["#svgHubble", "cam_hub"],

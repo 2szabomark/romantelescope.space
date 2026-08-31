@@ -416,28 +416,22 @@ function dsnTick() {
 }
 
 // ---------- 6 ladder ----------
-var LD_MIN = 2, LD_MAX = Math.log10(2000000); // 100 km .. 2M km
-function ldX(kmv) {
-  var l = Math.log10(Math.max(100, kmv));
-  return 70 + 860 * (l - LD_MIN) / (LD_MAX - LD_MIN);
-}
+// True-to-scale linear strip, 0 .. 1.5M km: the familiar orbits crowd the left
+// edge — that compression is the point of the picture.
+function ldX(kmv) { return 70 + 860 * (Math.min(kmv, L2KM) / L2KM); }
 function ldBuildRungs() {
   var g = $("ldRungs"); g.innerHTML = "";
   [[400, "ISS"], [35786, T("hf_tv")], [MOONKM, T("hf_moon")], [L2KM, "L2"]].forEach(function (r, i) {
     var x = ldX(r[0]);
-    // on phones the neighbouring labels collide: stagger names, drop the km values
-    var yName = MOB ? (i % 2 === 0 ? 172 : 208) : 172;
-    makeEl("line", { x1: x, x2: x, y1: 118, y2: MOB && i % 2 === 1 ? 196 : 142, stroke: "#94a1c7", "stroke-width": 1.4, opacity: MOB && i % 2 === 1 ? 0.5 : 1 }, g);
-    var t = makeEl("text", { x: x, y: yName, "text-anchor": "middle", "class": "sl sl-strong" }, g);
-    t.textContent = r[1];
-    if (!MOB) {
-      var t2 = makeEl("text", { x: x, y: 196, "text-anchor": "middle", "class": "sl" }, g);
-      t2.textContent = fmt(r[0]) + " km";
-    }
+    var row2 = i % 2 === 1; // ISS and TV satellites sit almost on top of each other: alternate rows
+    makeEl("line", { x1: x, x2: x, y1: 118, y2: row2 ? 196 : 142, stroke: "#94a1c7", "stroke-width": 1.4, opacity: row2 ? 0.55 : 1 }, g);
+    var anchor = i === 3 ? "end" : (i === 2 ? "middle" : "start");
+    var t = makeEl("text", { x: i === 3 ? x : x + 2, y: row2 ? 208 : 172, "text-anchor": anchor, "class": "sl sl-strong" }, g);
+    t.textContent = r[1] + (MOB ? "" : " · " + fmt(r[0]) + " km");
   });
 }
 function ladderTick(d) {
-  var dist = Math.max(150, km(d));
+  var dist = Math.max(0, km(d));
   $("ldCraft").setAttribute("transform", "translate(" + ldX(dist).toFixed(1) + ",130)");
   $("ldGeoX").textContent = (dist / 35786).toFixed(1) + "×";
   $("ldRemain").textContent = fmt(Math.max(0, L2KM - dist));
