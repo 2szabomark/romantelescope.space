@@ -1,0 +1,405 @@
+<div class="wrap">
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <h1>Roman, step by step</h1>
+    <p class="tag">NASA's newest space telescope launched on Aug 30, 2026 and is flying to a point 1.5 million km from Earth. Every figure below ticks in real time, anchored to the actual launch clock.</p>
+
+    <div class="heartbeat">
+      <div class="hb-val"><span id="hbNum">—</span><small> s</small></div>
+      <div class="hb-cap" id="hbCap">—</div>
+      <figure class="pingfig"><svg viewBox="0 0 1000 120" role="img" aria-label="A radio pulse travelling between Earth and Roman in real time">
+        <line x1="60" y1="60" x2="940" y2="60" stroke="#20294b" stroke-width="1.6"/>
+        <line x1="940" y1="50" x2="940" y2="70" stroke="#94a1c7" stroke-width="1.6"/>
+        <text class="sl" x="940" y="98" text-anchor="end" id="svgPingL2">L2 — 5.0 s away</text>
+        <circle cx="60" cy="60" r="10" fill="url(#eg)"/>
+        <text class="sl" x="60" y="98" text-anchor="middle" id="svgPingEarth">Earth</text>
+        <circle id="pgRingE" cx="60" cy="60" r="0" fill="none" stroke="#ffb454" stroke-width="1.6" opacity="0"/>
+        <g id="pgRoman" transform="translate(60,60)">
+          <circle r="4" fill="#ffb454"/>
+          <circle id="pgRingR" r="0" fill="none" stroke="#ffb454" stroke-width="1.6" opacity="0"/>
+          <text class="sl sl-amber" x="0" y="-18" text-anchor="middle">Roman</text>
+        </g>
+        <g id="pgPulse" opacity="0">
+          <path d="M -7 -13 Q 6 0 -7 13" fill="none" stroke="#ffb454" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M -13 -9 Q -4 0 -13 9" fill="none" stroke="#ffb454" stroke-width="1.6" opacity="0.55" stroke-linecap="round"/>
+        </g>
+      </svg></figure>
+      <p class="hb-note" id="hbNote">—</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="v" id="stDist">—<small> km</small></div>
+        <div class="k">distance from Earth, estimated</div>
+        <div class="d">▪ <b id="stDistD">—</b> <span data-i="d_lasthour">in the last hour</span></div>
+      </div>
+      <div class="stat">
+        <div class="v" id="stSpeed">—<small> km/h</small></div>
+        <div class="k">speed away from Earth, modeled</div>
+        <div class="d down">▪ <b id="stSpeedD">—</b> <span data-i="d_lasthour">in the last hour</span></div>
+      </div>
+      <div class="stat">
+        <div class="v" id="stPct">—<small> %</small></div>
+        <div class="k">of the way to L2</div>
+        <div class="d" id="stDayLine">—</div>
+      </div>
+      <div class="stat">
+        <div class="v" id="stMet">—</div>
+        <div class="k">mission elapsed time</div>
+        <div class="d" data-i="d_launched">▪ launched <b>Aug 30, 7:26 a.m. EDT</b></div>
+      </div>
+    </div>
+  </header>
+
+  <nav aria-label="Sections"><div class="nav-in">
+    <a href="#route">Route</a>
+    <a href="#launch">First 91 minutes</a>
+    <a href="#boosters">Boosters</a>
+    <a href="#deploys">Unfolding</a>
+    <a href="#anatomy">The observatory</a>
+    <a href="#listening">Who's listening</a>
+    <a href="#howfar">How far</a>
+    <a href="#speed">How fast</a>
+    <a href="#camera">The camera</a>
+    <a href="#next">What's next</a>
+    <a href="#socials">Follow</a>
+  </div></nav>
+  <span class="langs" role="group" aria-label="Language">
+    <a class="langbtn" data-lang="en" href="/">EN</a>
+    <a class="langbtn" data-lang="hu" href="/hu/">HU</a>
+    <a class="langbtn" data-lang="de" href="/de/">DE</a>
+    <a class="langbtn" data-lang="es" href="/es/">ES</a>
+    <a class="langbtn" data-lang="zh" href="/zh/">中文</a>
+  </span>
+
+  <!-- ================= 1 ROUTE ================= -->
+  <section class="mod" id="route">
+    <div class="mod-head"><h2>Where is it on the route?</h2><span class="chip live">live estimate</span></div>
+    <p class="lead">Top-down view, <b>distances to scale</b>: the Moon's orbit is about a quarter of the way. The amber trace is flown, the dashed line is still ahead.</p>
+    <figure><svg viewBox="0 0 1000 400" role="img" aria-label="Map of Roman's position between Earth and L2">
+      <defs>
+        <radialGradient id="eg" cx="32%" cy="35%" r="80%">
+          <stop offset="0%" stop-color="#9fd0ff"/><stop offset="55%" stop-color="#3a7bd0"/><stop offset="100%" stop-color="#123063"/>
+        </radialGradient>
+        <linearGradient id="tg" gradientUnits="userSpaceOnUse" x1="110" y1="200" x2="950" y2="200">
+          <stop offset="0%" stop-color="#ff8a3d"/><stop offset="100%" stop-color="#ffb454"/>
+        </linearGradient>
+      </defs>
+      <g id="rtStars"></g>
+      <circle cx="110" cy="200" r="215" fill="none" stroke="#20294b" stroke-width="1.4" stroke-dasharray="3 7"/>
+      <text class="sl" x="258" y="38" id="svgMoonOrbit">Moon's orbit</text>
+      <path id="rtPlan" d="M 110 200 C 320 148, 640 152, 950 200" fill="none" stroke="#3a4877" stroke-width="1.6" stroke-dasharray="2 8" stroke-linecap="round"/>
+      <path id="rtDone" d="M 110 200 C 320 148, 640 152, 950 200" fill="none" stroke="url(#tg)" stroke-width="2.6" stroke-linecap="round"/>
+      <ellipse cx="950" cy="200" rx="30" ry="88" fill="none" stroke="#3a4877" stroke-width="1.4" stroke-dasharray="3 7"/>
+      <line x1="940" y1="200" x2="960" y2="200" stroke="#94a1c7" stroke-width="1.6"/>
+      <line x1="950" y1="190" x2="950" y2="210" stroke="#94a1c7" stroke-width="1.6"/>
+      <text class="sl sl-strong" x="936" y="316" >L2</text>
+      <circle cx="110" cy="200" r="13" fill="url(#eg)"/>
+      <text class="sl sl-strong" x="96" y="238" id="svgEarthRt">Earth</text>
+      <circle id="rtMoon" cx="325" cy="200" r="4.5" fill="#c9d2e8"><title>Moon</title></circle>
+      <g id="rtCraft" transform="translate(110,200)">
+        <circle r="12" fill="#ffb454" opacity="0.18"/>
+        <circle r="4.2" fill="#ffb454" class="glowpulse"/>
+        <text class="sl sl-amber" x="12" y="-10">Roman</text>
+      </g>
+      <line x1="110" y1="360" x2="950" y2="360" stroke="#20294b" stroke-width="1.4"/>
+      <g id="rtTicks"></g>
+    </svg></figure>
+    <p class="howto">How to read it: the pulsing dot is Roman's estimated position <b>right now</b>. Body sizes and the halo loop at L2 are stylized; everything along the line is to scale.</p>
+    <ul class="compare">
+      <li><b id="cmpMoonX">—</b><span data-i="r_c1">Earth–Moon distances covered so far</span></li>
+      <li><b id="cmpEarthLaps">—</b><span data-i="r_c2">times around Earth's equator, in distance flown</span></li>
+    </ul>
+  </section>
+
+  <!-- ================= 2 FIRST 91 MIN ================= -->
+  <section class="mod" id="launch">
+    <div class="mod-head"><h2>What happened in the first 91 minutes?</h2><span class="chip done">complete</span></div>
+    <p class="lead">The whole opening act, minute by minute — every event below is <b>confirmed by NASA</b>.</p>
+    <figure><svg viewBox="0 0 1000 250" role="img" aria-label="Timeline of the first 91 minutes of flight">
+      <line x1="70" y1="150" x2="930" y2="150" stroke="#20294b" stroke-width="2"/>
+      <g id="lnEvents"></g>
+      <g id="lnMarker" transform="translate(70,150)">
+        <circle r="7" fill="#ffb454"/>
+        <circle r="12" fill="none" stroke="#ffb454" stroke-width="1.4" opacity="0.5"/>
+      </g>
+    </svg></figure>
+    <div class="btnrow">
+      <button id="lnPlay">Replay the 91 minutes</button>
+      <span class="btnnote">6 seconds, events pop as the marker passes them.</span>
+    </div>
+  </section>
+
+  <!-- ================= 3 BOOSTERS ================= -->
+  <section class="mod" id="boosters">
+    <div class="mod-head"><h2>Where did the boosters go?</h2><span class="chip done">complete</span></div>
+    <p class="lead">Falcon Heavy's two side boosters didn't ditch in the ocean — they flew <b>back to the launch site</b> for refurbishment while the core stage pushed Roman on.</p>
+    <figure><svg viewBox="0 0 1000 380" role="img" aria-label="Side boosters returning to the launch site">
+      <line x1="0" y1="330" x2="1000" y2="330" stroke="#20294b" stroke-width="2"/>
+      <rect x="475" y="310" width="50" height="8" rx="2" fill="#20294b"/>
+      <text class="sl" x="500" y="360" text-anchor="middle">LC-39A</text>
+      <rect x="150" y="312" width="40" height="6" rx="2" fill="#20294b"/>
+      <rect x="810" y="312" width="40" height="6" rx="2" fill="#20294b"/>
+      <text class="sl" x="170" y="360" text-anchor="middle" data-i="b_lz">landing zone</text>
+      <text class="sl" x="830" y="360" text-anchor="middle" data-i="b_lz">landing zone</text>
+      <path id="boCore" d="M 500 300 C 520 190, 570 90, 660 24" fill="none" stroke="#3a4877" stroke-width="1.5" stroke-dasharray="2 7"/>
+      <path id="boL" d="M 492 260 C 430 140, 250 120, 172 306" fill="none" stroke="#3a4877" stroke-width="1.5" stroke-dasharray="2 7"/>
+      <path id="boR" d="M 508 260 C 560 120, 760 110, 828 306" fill="none" stroke="#3a4877" stroke-width="1.5" stroke-dasharray="2 7"/>
+      <text class="sl" x="672" y="20" id="svgBoCore">core stage + Roman, onward</text>
+      <g id="boCoreDot"><rect x="-4" y="-14" width="8" height="28" rx="3" fill="#dde5f7"/><path id="boCoreFlame" d="M -3 14 L 0 26 L 3 14 Z" fill="#ffb454"/></g>
+      <g id="boLDot"><rect x="-3.5" y="-12" width="7" height="24" rx="3" fill="#94a1c7"/><path d="M -2.5 12 L 0 21 L 2.5 12 Z" fill="#ffb454" class="boFlame"/></g>
+      <g id="boRDot"><rect x="-3.5" y="-12" width="7" height="24" rx="3" fill="#94a1c7"/><path d="M -2.5 12 L 0 21 L 2.5 12 Z" fill="#ffb454" class="boFlame"/></g>
+    </svg></figure>
+    <div class="btnrow">
+      <button id="boPlay">Replay the flyback</button>
+      <span class="btnnote">Both boosters landed; it was the fourth NASA flagship to ride a Falcon Heavy.</span>
+    </div>
+  </section>
+
+  <!-- ================= 4 DEPLOYS ================= -->
+  <section class="mod" id="deploys">
+    <div class="mod-head"><h2>What has unfolded so far?</h2><span class="chip live">tracking sequence</span></div>
+    <p class="lead">Same NASA renders as the observatory section: <b>pick an item</b> and that system lights up on the spacecraft. Filled amber dots are <b>confirmed open</b>; ringed items follow in NASA's published order — confirmations land on the mission blog first.</p>
+    <div class="rig">
+      <div class="stage-wrap">
+        <div class="stage" id="dpStage">
+          <img id="dpImg" alt="Roman observatory rendering, NASA/GSFC" src="">
+          <div class="stage-cap" id="dpCap">Pick an item to light it up</div>
+        </div>
+      </div>
+      <div class="dpl" id="dpList" role="group" aria-label="Deployment status"></div>
+    </div>
+    <p class="howto">Imagery: <b>NASA/GSFC</b>, same frames as the observatory model below. The coronagraph is only visible from the left, so that item flips the view for you.</p>
+  </section>
+
+  <!-- ================= 4b ANATOMY ================= -->
+  <section class="mod" id="anatomy">
+    <div class="mod-head"><h2>What is Roman made of?</h2><span class="chip">interactive</span></div>
+    <p class="lead">This is <b>NASA's own interactive, rebuilt one-to-one</b>: the agency's renders, the same four views, the same clickable regions. Hover or tap a part and it lights up; the names below work too — the Coronagraph is only visible from the left, so its chip switches the view for you.</p>
+    <div class="chips" role="group" aria-label="Observatory systems">
+      <button id="chip_tel">Telescope</button>
+      <button id="chip_wfi">Wide Field Instrument</button>
+      <button id="chip_cgi">Coronagraph Instrument</button>
+      <button id="chip_sass">Solar Array Sun Shield</button>
+      <button id="chip_oss">Observatory Support Systems</button>
+      <button id="chip_com">Communications</button>
+    </div>
+    <div class="rig">
+      <div class="viewbar" id="viewbar" role="group" aria-label="Telescope views"></div>
+      <div class="stage-wrap">
+        <div class="stage" id="anatStage">
+          <img id="anatImg" alt="Roman observatory rendering, NASA/GSFC" src="">
+          <div class="stage-cap" id="stageCap">Hover or tap a part of the observatory</div>
+        </div>
+      </div>
+    </div>
+    <div class="part-detail">
+      <div class="pd-head"><h3 id="pdName">—</h3><span class="pd-stat" id="pdStat">—</span></div>
+      <p id="pdBlurb">—</p>
+      <p class="pd-link" id="pdLink"></p>
+    </div>
+    <p class="howto">Imagery: <b>NASA's Goddard Space Flight Center</b> — the renders, views, and hotspot geometry come from the official <a href="https://science.nasa.gov/mission/roman-space-telescope/explore-roman/" target="_blank" rel="noopener">Explore the Roman Observatory</a> interactive at <a href="https://roman.gsfc.nasa.gov/interactive/" target="_blank" rel="noopener">roman.gsfc.nasa.gov</a>, which also covers the ground systems.</p>
+  </section>
+
+  <!-- ================= 5 DSN ================= -->
+  <section class="mod" id="listening">
+    <div class="mod-head"><h2>Who is listening right now?</h2><span class="chip live">estimated live</span></div>
+    <p class="lead">Roman talks through NASA's Deep Space Network — giant dishes near <b>Canberra, Madrid, and Goldstone</b>. As Earth turns, the signal is handed dish to dish, roughly every eight hours.</p>
+    <figure><svg viewBox="0 0 1000 400" role="img" aria-label="Which Deep Space Network complex currently faces Roman">
+      <g id="dsnNight" transform="rotate(0 340 200)">
+        <path d="M 340 60 A 140 140 0 0 1 340 340 Z" fill="#04060f" opacity="0.55"/>
+      </g>
+      <circle cx="340" cy="200" r="140" fill="none" stroke="#3a4877" stroke-width="2"/>
+      <circle cx="340" cy="200" r="140" fill="#12203f" opacity="0.35"/>
+      <text class="sl" x="340" y="206" text-anchor="middle" id="svgDsnEarth">Earth, from above the North Pole</text>
+      <g id="dsnSunArrow"></g>
+      <g id="dsnDishes"></g>
+      <g id="dsnRoman" transform="translate(870,200)">
+        <circle r="11" fill="#ffb454" opacity="0.2"/>
+        <circle r="4" fill="#ffb454" class="glowpulse"/>
+        <text class="sl sl-amber" x="-24" y="-16">Roman</text>
+      </g>
+      <line id="dsnBeam" x1="480" y1="200" x2="852" y2="200" stroke="#ffb454" stroke-width="1.8" class="beam"/>
+      <text class="sl" id="dsnCaption" x="500" y="376" text-anchor="middle">—</text>
+    </svg></figure>
+    <p class="howto">How to read it: the shaded half is Earth's night side. L2 sits opposite the Sun, so the dish where it's <b>currently night</b> has the best view — that one gets the beam. This is a <b>geometric estimate</b>, not official scheduling.</p>
+    <ul class="compare">
+      <li><b id="dsnNow">—</b><span data-i="ds_c1">best placed to talk to Roman right now</span></li>
+      <li><b id="dsnNext">—</b><span data-i="ds_c2">estimated next handover</span></li>
+    </ul>
+  </section>
+
+  <!-- ================= 6 HOW FAR ================= -->
+  <section class="mod" id="howfar">
+    <div class="mod-head"><h2>How far is far?</h2><span class="chip live">live estimate</span></div>
+    <p class="lead">Each rung of this ladder is roughly <b>ten times farther</b> than the one before it — that's the only way ISS and L2 fit in one picture. Watch Roman climb past them.</p>
+    <figure><svg viewBox="0 0 1000 240" role="img" aria-label="Logarithmic distance ladder from Earth orbit to L2">
+      <line x1="70" y1="130" x2="930" y2="130" stroke="#20294b" stroke-width="2"/>
+      <g id="ldRungs"></g>
+      <g id="ldCraft" transform="translate(70,130)">
+        <circle r="11" fill="#ffb454" opacity="0.18"/>
+        <circle r="4.5" fill="#ffb454" class="glowpulse"/>
+        <text class="sl sl-amber" id="ldCraftLbl" x="0" y="-46" text-anchor="middle">Roman</text>
+      </g>
+    </svg></figure>
+    <p class="howto">How to read it: satellites you use daily live at the far left. Roman left the Moon's rung behind and won't stop until L2.</p>
+    <ul class="compare">
+      <li><b id="ldGeoX">—</b><span data-i="hf_c1">times higher than TV satellites right now</span></li>
+      <li><b id="ldRemain">—</b><span data-i="hf_c2">km still to go</span></li>
+    </ul>
+  </section>
+
+  <!-- ================= 7 SPEED ================= -->
+  <section class="mod" id="speed">
+    <div class="mod-head"><h2>How fast is it going?</h2><span class="chip live">modeled</span></div>
+    <p class="lead">From a standstill on the pad to <b>near escape speed in under an hour</b> — then Earth's gravity claws almost all of it back. Roman arrives at L2 at roughly walking pace.</p>
+    <figure><svg viewBox="0 0 1000 340" role="img" aria-label="Modeled speed of Roman over the 90-day cruise, linear scale">
+      <g id="spGrid"></g>
+      <line id="spToday" x1="80" x2="80" y1="60" y2="282" stroke="#ffb454" stroke-width="1.3" stroke-dasharray="4 5" opacity="0.85"/>
+      <text class="sl sl-amber" id="spTodayLbl" x="80" y="48" text-anchor="middle">today</text>
+      <polyline id="spCurve" fill="none" stroke="#3a4877" stroke-width="2" points=""/>
+      <polyline id="spCurveDone" fill="none" stroke="#ffb454" stroke-width="2.6" points=""/>
+      <line id="spJet" x1="70" x2="930" y1="0" y2="0" stroke="#6fb3f2" stroke-width="1.3" stroke-dasharray="5 6"/>
+      <text class="sl" id="spJetLbl" x="76" y="0">passenger jet, ~900 km/h</text>
+      <circle id="spEndDot" cx="930" cy="0" r="3.5" fill="#94a1c7"/>
+      <text class="sl" id="spEndLbl" x="926" y="238" text-anchor="end">arrives at ~5 km/h — walking pace</text>
+      <g id="spDot"><circle r="5.5" fill="#ffb454" class="glowpulse"/></g>
+      <text class="sl sl-amber" id="spNowLbl" x="0" y="0">—</text>
+    </svg></figure>
+    <p class="howto">How to read it: the curve starts at <b>zero on the pad</b>; the launch spike shoots past the top of this scale and is clipped so the 90-day story stays readable. Gridlines every 2,000 km/h, the dashed vertical line marks <b>today</b>, amber is already flown. <b>Modeled profile</b>, not telemetry.</p>
+    <ul class="compare">
+      <li><b>≈ 36,000 km/h</b><span data-i="sp_c1">the modeled peak, minutes after the final burn</span></li>
+      <li><b id="spJetX">—</b><span data-i="sp_c2">the speed of a passenger jet, right now</span></li>
+      <li><b id="spArrive">~5 km/h</b><span data-i="sp_c3">the modeled arrival speed — a brisk walk</span></li>
+    </ul>
+  </section>
+
+  <!-- ================= 8 CAMERA ================= -->
+  <section class="mod" id="camera">
+    <div class="mod-head"><h2>What will the camera see?</h2><span class="chip">wakes in a few weeks</span></div>
+    <p class="lead">Roman's main camera is a wall of <b>18 infrared detectors</b> — 300 megapixels per frame. The small square shows Hubble's entire field of view at the same sky scale.</p>
+    <figure><svg viewBox="0 0 1000 400" role="img" aria-label="Roman's 18-detector focal plane compared with Hubble's field of view">
+      <g id="fpTiles"></g>
+      <rect id="fpHubble" x="828" y="300" width="60" height="60" fill="none" stroke="#6fb3f2" stroke-width="2"/>
+      <text class="sl" x="858" y="386" text-anchor="middle" id="svgHubble">Hubble's whole view</text>
+      <text class="sl sl-big" id="fpCount" x="500" y="52" text-anchor="middle">0 of 18 detectors</text>
+    </svg></figure>
+    <div class="btnrow">
+      <button id="fpPlay">Light the detectors</button>
+      <span class="btnnote">Activation is planned a few weeks into the cruise; first public images by early 2027.</span>
+    </div>
+    <ul class="compare">
+      <li><b>100×</b><span data-i="cam_c1">Hubble's field of view in one shot, at matching sharpness</span></li>
+      <li><b>1.4 TB</b><span data-i="cam_c2">of data per day — about 460 hours of streaming video</span></li>
+      <li><b>1,000×</b><span data-i="cam_c3">faster sky surveys than Hubble</span></li>
+    </ul>
+  </section>
+
+  <!-- ================= 9 NEXT ================= -->
+  <section class="mod" id="next">
+    <div class="mod-head"><h2>What happens next?</h2><span class="chip">upcoming</span></div>
+    <p class="lead">Not just two burns and a parking spot. Below is the rest of the journey in <b>five phases with their sub-steps</b> — tap a phase to open it. The picture shows the part people rarely explain: <b>why a halo orbit at all</b>.</p>
+    <figure><svg viewBox="0 0 1000 360" role="img" aria-label="The remaining route: two trim burns, Earth's shadow cone reaching almost to L2, and the halo orbit that stays in sunlight">
+      <polygon points="72,158 72,182 738,170" fill="#04060f" opacity="0.6"/>
+      <polygon points="72,150 72,190 806,170" fill="#04060f" opacity="0.25"/>
+      <text class="sl" x="300" y="207" id="svgShadow">Earth's shadow — it fades out just before L2</text>
+      <line x1="60" y1="170" x2="716" y2="170" stroke="#3a4877" stroke-width="1.6" stroke-dasharray="2 8"/>
+      <circle cx="60" cy="170" r="10" fill="url(#eg)"/>
+      <text class="sl" x="60" y="140" text-anchor="middle" id="svgEarthNx">Earth</text>
+      <g>
+        <line x1="200" y1="158" x2="200" y2="182" stroke="#ffb454" stroke-width="2.4"/>
+        <text class="sl" x="200" y="130" text-anchor="middle" id="svgTb1">trim burn 1</text>
+        <text class="sl" x="200" y="150" text-anchor="middle" opacity="0.75" id="svgTb1w">first days</text>
+      </g>
+      <g>
+        <line x1="470" y1="158" x2="470" y2="182" stroke="#ffb454" stroke-width="2.4"/>
+        <text class="sl" x="470" y="130" text-anchor="middle" id="svgTb2">trim burn 2</text>
+        <text class="sl" x="470" y="150" text-anchor="middle" opacity="0.75" id="svgTb2w">later in the cruise</text>
+      </g>
+      <path d="M 866 152 L 890 160 L 868 170 Z" fill="#ffb454" opacity="0.9"/>
+      <text class="sl sl-amber" x="906" y="140" text-anchor="end" id="svgBrake">braking burn</text>
+      <ellipse id="nxHalo" cx="790" cy="170" rx="70" ry="120" fill="none" stroke="#ffb454" stroke-width="2.4"/>
+      <line x1="780" y1="170" x2="800" y2="170" stroke="#94a1c7" stroke-width="1.6"/>
+      <line x1="790" y1="160" x2="790" y2="180" stroke="#94a1c7" stroke-width="1.6"/>
+      <text class="sl sl-strong" x="790" y="26" text-anchor="middle" id="svgArrive">arrival ≈ late November</text>
+      <text class="sl" x="500" y="336" text-anchor="middle" id="svgLap">the loop is wider than the shadow — one lap ≈ six months, always in sunlight</text>
+      <g id="nxCraft"><circle r="4.5" fill="#ffb454" class="glowpulse"/></g>
+    </svg></figure>
+    <div class="btnrow">
+      <button id="nxPlay">Replay the insertion</button>
+      <span class="btnnote">The loop redraws and Roman settles onto it, missing Earth's shadow the whole way round.</span>
+    </div>
+
+    <div class="steps">
+      <details open>
+        <summary><span>1. Finish unfolding</span><span class="when">first days, early September</span></summary>
+        <ul class="sub">
+          <li><b>High-gain antenna deploys</b><span class="x">The main dish unfolds at the rear. Until then Roman talks through smaller antennas; once it's open, the 1.4 TB-per-day science downlink is available.</span></li>
+          <li><b>Aperture cover opens</b><span class="x">The visor lifts off the telescope's mouth — from here the optics see sky, and the barrel starts settling toward its cold operating state.</span></li>
+          <li><b>Coronagraph powers on</b><span class="x">The planet-imaging technology demo boots up and begins health checks, years before its own observing campaign.</span></li>
+          <li><b>Trim burn 1</b><span class="x">A short thruster firing corrects the tiny aim error left over from the rocket. A small nudge now is far cheaper than a big burn later.</span></li>
+        </ul>
+      </details>
+      <details>
+        <summary><span>2. Cool down, wake the camera</span><span class="when">weeks 2–5, September</span></summary>
+        <ul class="sub">
+          <li><b>Cooling and outgassing <span class="tag">standard practice</span></b><span class="x">In vacuum, moisture trapped in materials slowly escapes and temperatures settle. Infrared detectors want deep cold and clean optics before going fully live.</span></li>
+          <li><b>Wide Field Instrument activates</b><span class="x">A few weeks in, per NASA — the 300-megapixel camera and its 18 detectors switch on for the first time in space.</span></li>
+          <li><b>First detector readouts <span class="tag">standard practice</span></b><span class="x">Dark frames, test patterns, first starlight on the chips. Engineering data — not public images yet.</span></li>
+        </ul>
+      </details>
+      <details>
+        <summary><span>3. The long middle of the cruise</span><span class="when">weeks 5–12, October–November</span></summary>
+        <ul class="sub">
+          <li><b>Calibrations and tests</b><span class="x">NASA runs the instruments through a series of calibrations throughout the three-month commissioning — in practice that means focus sweeps, pointing-stability checks, filter wheels, detector behavior.</span></li>
+          <li><b>Trim burn 2</b><span class="x">The second and final course correction lines up the arrival geometry. NASA hasn't announced its date.</span></li>
+          <li><b>Slowing to a crawl</b><span class="x">By November the model has Roman at bicycle pace, then walking pace relative to Earth — the last stretch is a drift, not a flight.</span></li>
+        </ul>
+      </details>
+      <details>
+        <summary><span>4. Arrival: onto the halo</span><span class="when">~day 90, late November</span></summary>
+        <ul class="sub">
+          <li><b>Braking burn</b><span class="x">Without it, Roman would sail straight past. The burn bends the path onto the loop around L2.</span></li>
+          <li><b>Why a halo at all</b><span class="x">L2 itself is an unstable balance point sitting near the tip of Earth's shadow. Orbiting <em>around</em> the empty point keeps the solar panels in constant sunlight and the temperatures rock-steady.</span></li>
+          <li><b>Station-keeping begins <span class="tag">standard practice</span></b><span class="x">Tiny periodic burns hold the loop — one reason nearly a ton of propellant is aboard. A single lap takes about half a year.</span></li>
+        </ul>
+      </details>
+      <details>
+        <summary><span>5. From first images to the surveys</span><span class="when">December, then 2027</span></summary>
+        <ul class="sub">
+          <li><b>End-to-end rehearsals <span class="tag">standard practice</span></b><span class="x">The whole chain — point, observe, downlink 1.4 TB a day, process on the ground — gets exercised the way the surveys will run it.</span></li>
+          <li><b>First images released</b><span class="x">NASA anticipates early 2027. Expect a showpiece field that shows off the 100-times-Hubble view.</span></li>
+          <li><b>The science program starts</b><span class="x">Five years of wide surveys for dark energy and dark matter, a microlensing census of planets toward the galactic center, a supernova time-domain survey, and the coronagraph's planet-imaging demo — with machine learning and citizen scientists helping sift the data flood.</span></li>
+        </ul>
+      </details>
+    </div>
+    <p class="howto">How to read it: bold sub-steps without a tag are <b>NASA-stated</b>; items marked "standard practice" describe how observatory commissioning usually runs — order and timing can differ. Week numbers and the arrival window come from this page's model.</p>
+
+    <ul class="compare">
+      <li><b id="nxDays">—</b><span data-i="nx_c1">days until arrival, estimated — around late November</span></li>
+      <li><b>early 2027</b><span data-i="nx_c2">NASA expects to release the first images</span></li>
+      <li><b>5 years</b><span data-i="nx_c3">of primary mission after commissioning</span></li>
+    </ul>
+  </section>
+
+  <section class="mod" id="socials" style="border-bottom:none">
+    <div class="mod-head"><h2>Follow the mission</h2></div>
+    <p class="lead">Roman speaks in first person on these channels — launch cheers, deployment confirmations, and eventually the first images. All links go to official NASA accounts and pages.</p>
+    <div class="soc">
+      <a href="https://x.com/NASARoman" target="_blank" rel="noopener">X<small>@NASARoman</small></a>
+      <a href="https://www.facebook.com/NASARoman" target="_blank" rel="noopener">Facebook<small>NASARoman</small></a>
+      <a href="https://www.flickr.com/photos/NASARoman" target="_blank" rel="noopener">Flickr<small>photo gallery</small></a>
+      <a href="https://www.youtube.com/@NASAGoddard/search?query=roman%20space%20telescope" target="_blank" rel="noopener">YouTube<small>Roman on NASA Goddard</small></a>
+      <a href="https://science.nasa.gov/blogs/roman/" target="_blank" rel="noopener">Mission blog<small>milestones land here first</small></a>
+      <a href="https://science.nasa.gov/mission/roman-space-telescope/" target="_blank" rel="noopener">Mission home<small>science.nasa.gov</small></a>
+    </div>
+  </section>
+
+  <footer>
+    <p><b>What is measured and what is modeled:</b> launch time, event times in the first 91 minutes, deployment confirmations, the DSN complex list, instrument specs, and all dates are from NASA. Roman's current distance, speed, signal delay, and the "who's listening" pick are estimates — a simplified deceleration profile over a ~90-day cruise and plain Earth-rotation geometry, anchored to the real launch clock (Aug 30, 2026, 11:26 UTC). NASA's own communications differ on arrival: the agency's X post says about one month to the destination, the press release says three months to the final orbit — this page models the release's figure.</p>
+    <p><b>Sources:</b> NASA's launch release and Roman mission pages at science.nasa.gov, NASA Goddard's Roman observatory tour. The observatory diagram is a stylized rebuild of NASA's official <a href="https://science.nasa.gov/mission/roman-space-telescope/explore-roman/" target="_blank" rel="noopener">Explore the Roman Observatory</a> interactive; observatory imagery courtesy NASA/GSFC. Milestone confirmations appear first on the <a href="https://science.nasa.gov/blogs/roman/" target="_blank" rel="noopener">Roman mission blog</a>; mission home: <a href="https://science.nasa.gov/mission/roman-space-telescope/" target="_blank" rel="noopener">science.nasa.gov</a>.</p>
+    <p>Inspired by the module style of holadelej.hu — one question, one picture, honest labels. Built Aug 31, 2026.</p>
+  </footer>
+
+</div>

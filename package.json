@@ -1,0 +1,21 @@
+{
+  "name": "romantelescope-space",
+  "version": "2.0.0",
+  "description": "romantelescope.space — live fan page tracking NASA's Roman Space Telescope on its way to L2",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2szabomark/romantelescope.space.git"
+  },
+  "license": "ISC",
+  "homepage": "https://romantelescope.space",
+  "dependencies": {
+    "astro": "^7.2.9",
+    "cheerio": "^1.2.0"
+  }
+}

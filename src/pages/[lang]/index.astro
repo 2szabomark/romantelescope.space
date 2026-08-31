@@ -1,0 +1,9 @@
+---
+import Base from "../../layouts/Base.astro";
+
+export function getStaticPaths() {
+  return ["hu", "de", "es", "zh"].map((lang) => ({ params: { lang } }));
+}
+const { lang } = Astro.params;
+---
+<Base lang={lang} />

@@ -1,0 +1,12 @@
+{
+  // Cloudflare Worker config: static assets only, no worker script needed.
+  // IMPORTANT: "name" must match the existing Worker's name in the Cloudflare
+  // dashboard, otherwise `wrangler deploy` creates a NEW worker.
+  "name": "romantelescope",
+  "compatibility_date": "2026-08-01",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

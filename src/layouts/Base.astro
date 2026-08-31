@@ -1,0 +1,33 @@
+---
+import "../styles/main.css";
+import { renderBody, pageMeta, RUNTIME, LANGS, HTML_LANG, LANG_HREF } from "../lib/translate.mjs";
+
+const { lang } = Astro.props;
+const meta = pageMeta(lang);
+const body = renderBody(lang);
+// inline JSON must not be able to close the script tag early
+const strJson = JSON.stringify(RUNTIME[lang]).replace(/</g, "\\u003c");
+const SITE = "https://romantelescope.space";
+---
+<!DOCTYPE html>
+<html lang={HTML_LANG[lang]}>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content={meta.description}>
+<title>{meta.title}</title>
+<link rel="canonical" href={SITE + LANG_HREF[lang]}>
+{LANGS.map((l) => <link rel="alternate" hreflang={HTML_LANG[l]} href={SITE + LANG_HREF[l]} />)}
+<link rel="alternate" hreflang="x-default" href={SITE + "/"}>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<Fragment set:html={body} />
+<script type="application/json" id="strdata" set:html={strJson}></script>
+<script>
+  import "../scripts/app.js";
+</script>
+</body>
+</html>
