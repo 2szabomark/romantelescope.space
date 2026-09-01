@@ -72,9 +72,8 @@ const jsonLd = JSON.stringify({
 <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" href="/fonts/space-grotesk-latin.woff2" crossorigin>
+{lang === "hu" && <link rel="preload" as="font" type="font/woff2" href="/fonts/space-grotesk-latin-ext.woff2" crossorigin />}
 <script type="application/ld+json" set:html={jsonLd}></script>
 </head>
 <body>

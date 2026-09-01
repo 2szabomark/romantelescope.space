@@ -689,8 +689,10 @@ if (mobMQ.addEventListener) {
 }
 
 // warm the render cache so hover/view swaps don't flicker on first use
-// (the images were inline data URIs in the monolith, so swaps were instant)
-if ("requestIdleCallback" in window) {
+// (the images were inline data URIs in the monolith, so swaps were instant);
+// skipped for visitors who asked for reduced data
+var conn = navigator.connection;
+if ("requestIdleCallback" in window && !(conn && (conn.saveData || /2g/.test(conn.effectiveType || "")))) {
   requestIdleCallback(function () {
     ANAT.forEach(function (v) {
       new Image().src = v.main;
