@@ -8,6 +8,39 @@ const body = renderBody(lang);
 // inline JSON must not be able to close the script tag early
 const strJson = JSON.stringify(RUNTIME[lang]).replace(/</g, "\\u003c");
 const SITE = "https://romantelescope.space";
+const canonical = SITE + LANG_HREF[lang];
+const OG_LOCALE = { en: "en_US", hu: "hu_HU", de: "de_DE", es: "es_ES", zh: "zh_CN" };
+const ogImage = SITE + "/og.png";
+
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: meta.title,
+  description: meta.description,
+  url: canonical,
+  inLanguage: HTML_LANG[lang],
+  isPartOf: {
+    "@type": "WebSite",
+    name: "Roman, step by step",
+    url: SITE + "/",
+  },
+  primaryImageOfPage: {
+    "@type": "ImageObject",
+    url: ogImage,
+    width: 1200,
+    height: 630,
+    caption: "NASA's Nancy Grace Roman Space Telescope (render: NASA/GSFC)",
+  },
+  about: {
+    "@type": "Thing",
+    name: "Nancy Grace Roman Space Telescope",
+    sameAs: [
+      "https://science.nasa.gov/mission/roman-space-telescope/",
+      "https://en.wikipedia.org/wiki/Nancy_Grace_Roman_Space_Telescope",
+    ],
+  },
+  dateModified: new Date().toISOString().slice(0, 10),
+}).replace(/</g, "\\u003c");
 ---
 <!DOCTYPE html>
 <html lang={HTML_LANG[lang]}>
@@ -17,9 +50,24 @@ const SITE = "https://romantelescope.space";
 <meta name="description" content={meta.description}>
 <meta name="theme-color" content="#070b18">
 <title>{meta.title}</title>
-<link rel="canonical" href={SITE + LANG_HREF[lang]}>
+<link rel="canonical" href={canonical}>
 {LANGS.map((l) => <link rel="alternate" hreflang={HTML_LANG[l]} href={SITE + LANG_HREF[l]} />)}
 <link rel="alternate" hreflang="x-default" href={SITE + "/"}>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Roman, step by step">
+<meta property="og:title" content={meta.title}>
+<meta property="og:description" content={meta.description}>
+<meta property="og:url" content={canonical}>
+<meta property="og:image" content={ogImage}>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NASA's Nancy Grace Roman Space Telescope against a field of galaxies (render: NASA/GSFC)">
+<meta property="og:locale" content={OG_LOCALE[lang]}>
+{LANGS.filter((l) => l !== lang).map((l) => <meta property="og:locale:alternate" content={OG_LOCALE[l]} />)}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content={meta.title}>
+<meta name="twitter:description" content={meta.description}>
+<meta name="twitter:image" content={ogImage}>
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
@@ -27,6 +75,7 @@ const SITE = "https://romantelescope.space";
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json" set:html={jsonLd}></script>
 </head>
 <body>
 <Fragment set:html={body} />

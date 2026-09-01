@@ -300,6 +300,7 @@ function anatSelect(s, fromChip) {
     b.setAttribute("data-view", v.key);
     b.setAttribute("type", "button");
     var im = document.createElement("img");
+    im.loading = "lazy"; im.decoding = "async";
     im.src = v.main; im.alt = v.label + " view";
     var sp = document.createElement("span");
     sp.textContent = T("view_" + v.key);

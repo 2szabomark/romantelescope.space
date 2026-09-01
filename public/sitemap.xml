@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://romantelescope.space/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://romantelescope.space/"/>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://romantelescope.space/hu/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://romantelescope.space/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://romantelescope.space/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://romantelescope.space/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://romantelescope.space/"/>
+  </url>
+  <url>
+    <loc>https://romantelescope.space/hu/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://romantelescope.space/"/>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://romantelescope.space/hu/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://romantelescope.space/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://romantelescope.space/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://romantelescope.space/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://romantelescope.space/"/>
+  </url>
+  <url>
+    <loc>https://romantelescope.space/de/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://romantelescope.space/"/>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://romantelescope.space/hu/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://romantelescope.space/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://romantelescope.space/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://romantelescope.space/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://romantelescope.space/"/>
+  </url>
+  <url>
+    <loc>https://romantelescope.space/es/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://romantelescope.space/"/>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://romantelescope.space/hu/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://romantelescope.space/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://romantelescope.space/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://romantelescope.space/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://romantelescope.space/"/>
+  </url>
+  <url>
+    <loc>https://romantelescope.space/zh/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://romantelescope.space/"/>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://romantelescope.space/hu/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://romantelescope.space/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://romantelescope.space/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://romantelescope.space/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://romantelescope.space/"/>
+  </url>
+</urlset>

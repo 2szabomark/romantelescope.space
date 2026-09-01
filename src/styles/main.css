@@ -145,7 +145,7 @@
   .viewbtn.on,.viewbtn.on:hover{border-color:var(--amber);color:var(--amber);background:#04070f}
   .stage-wrap{flex:1;min-width:0}
   .stage{position:relative;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:linear-gradient(to bottom,#000 0%,#050b26 70%)}
-  .stage>img{width:100%;display:block}
+  .stage>img{width:100%;display:block;aspect-ratio:1100/619} /* render dimensions — reserves space before the image loads (no layout shift) */
   .hot{position:absolute;cursor:pointer}
   .stage-cap{position:absolute;left:12px;bottom:10px;color:var(--dim);font-size:.8rem;background:rgba(4,7,15,.65);padding:3px 10px;border-radius:4px;pointer-events:none;max-width:80%}
   .stage-cap b{color:var(--amber);font-weight:600}

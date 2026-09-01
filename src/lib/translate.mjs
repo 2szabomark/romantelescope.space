@@ -89,10 +89,14 @@ export function renderBody(lang) {
   return $.html();
 }
 
+const DESC = {
+  en: "Live tracker for NASA's Roman Space Telescope: real-time distance, speed and signal delay, plus self-explanatory visualizations of every stage of the journey from Earth to L2.",
+  hu: "Élő követő a NASA Roman űrteleszkópjához: valós idejű távolság, sebesség és jelkésés, plusz magától értetődő ábrák az út minden szakaszáról a Földtől az L2-ig.",
+  de: "Live-Tracker für NASAs Roman-Weltraumteleskop: Entfernung, Geschwindigkeit und Signallaufzeit in Echtzeit, dazu selbsterklärende Grafiken zu jeder Etappe der Reise von der Erde zum L2.",
+  es: "Rastreador en vivo del telescopio espacial Roman de la NASA: distancia, velocidad y retardo de señal en tiempo real, con visualizaciones autoexplicativas de cada etapa del viaje de la Tierra a L2.",
+  zh: "NASA 罗曼太空望远镜实时追踪：实时距离、速度与信号延迟，并以直观图解呈现从地球到 L2 旅程的每个阶段。",
+};
+
 export function pageMeta(lang) {
-  const runtime = RUNTIME[lang];
-  const EN_DESC = "Roman, step by step — live, self-explanatory visualizations of every stage of NASA's Roman Space Telescope journey from Earth to L2.";
-  let desc = EN_DESC;
-  if (lang !== "en" && STATIC[lang].tag) desc = STATIC[lang].tag.replace(/<[^>]*>/g, "");
-  return { title: runtime.title, description: desc };
+  return { title: RUNTIME[lang].title, description: DESC[lang] || DESC.en };
 }
