@@ -146,5 +146,5 @@
  "so_home": "任务主页",
  "f_p1": "<b>哪些是实测、哪些是模型：</b>发射时间、最初 91 分钟的事件时刻、展开确认、DSN 站点列表、仪器参数及所有日期均来自 NASA。罗曼当前的距离、速度、信号延迟以及“谁在收听”的判断均为估算——在约 90 天航程上采用简化减速模型，加上简单的地球自转几何，全部锚定于真实发射时钟（2026 年 8 月 30 日 11:26 UTC）。NASA 自己的口径在抵达时间上并不一致：其 X 帖子称约一个月抵达目的地，新闻稿则称三个月进入最终轨道——本页按新闻稿的数字建模。",
  "f_p2": "<b>来源：</b>NASA 的发射新闻稿与 science.nasa.gov 上的罗曼任务页面，以及 NASA 戈达德的罗曼天文台导览。天文台示意图是对官方交互页 <a href=\"https://science.nasa.gov/mission/roman-space-telescope/explore-roman/\" target=\"_blank\" rel=\"noopener\">Explore the Roman Observatory</a> 的风格化重建；天文台图像由 NASA/GSFC 提供。里程碑确认最先发布于<a href=\"https://science.nasa.gov/blogs/roman/\" target=\"_blank\" rel=\"noopener\">罗曼任务博客</a>；任务主页：<a href=\"https://science.nasa.gov/mission/roman-space-telescope/\" target=\"_blank\" rel=\"noopener\">science.nasa.gov</a>。",
- "f_p3": "版式灵感来自 holadelej.hu 的模块风格——一个问题、一张图、诚实的标注。制作于 2026 年 8 月 31 日。"
+ "f_p3": "制作于 2026 年 8 月 31 日。"
 }
