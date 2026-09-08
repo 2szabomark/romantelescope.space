@@ -30,9 +30,9 @@ function eDays(msOffset) {
 // Milestones that need NASA's word stay manual: flip a flag here when the
 // mission blog confirms it, and every affected module updates on its own.
 var CONFIRMED = {
-  hga: false,        // high-gain antenna deployed        (deploy board item 3)
-  cover: false,      // aperture cover open               (deploy board item 4)
-  cgi: false,        // coronagraph powered on            (deploy board item 5)
+  hga: true,         // high-gain antenna deployed — NASA blog, Sep 1, 2026
+  cover: true,       // aperture cover ("visor") open — NASA blog, Sep 1, 2026
+  cgi: true,         // coronagraph powered on 7:27 a.m. EDT — NASA blog, Sep 1, 2026
   wfiActive: false,  // Wide Field Instrument switched on (camera section)
   arrived: false,    // halo-orbit insertion confirmed
   firstImages: false // first public images released
