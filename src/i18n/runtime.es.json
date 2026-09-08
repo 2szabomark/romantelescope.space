@@ -80,5 +80,6 @@
  "dp_wait": "se espera cualquier día — las confirmaciones aparecen primero en el blog de la misión",
  "cam_soon": "ventana de activación — según el plan de la NASA",
  "cam_on": "cámara activa",
- "nx_c1_arr": "días en su puesto en L2 — llegó a finales de noviembre"
+ "nx_c1_arr": "días en su puesto en L2 — llegó a finales de noviembre",
+ "cam_exp": "probablemente activa — según el plan de la NASA, sin confirmar"
 }

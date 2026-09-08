@@ -40,7 +40,8 @@ var CONFIRMED = {
 var PLAN = {
   deployWindow: 7,   // "within days" — after this the remaining deploys show "expected any day"
   camWake: 21,       // NASA: WFI activates a few weeks in — chip switches to "activation window"
-  arrive: 90         // ~90-day cruise
+  camActive: 35,     // end of NASA's "weeks 2-5" window — camera shown as likely active (unconfirmed)
+  arrive: 90         // ~90-day cruise — onStation() flips on this date even without confirmation
 };
 function onStation(d) { return CONFIRMED.arrived || d >= PLAN.arrive; }
 function frac(d) { if (d <= 0) return 0; return (1 - Math.exp(-Math.min(d, CRUISE) / TAU)) / NORM; }
@@ -652,9 +653,9 @@ function applyStage() {
     if (sp) sp.innerHTML = T("nx_c1_arr");
   }
   if (DEPLOYS.every(dpDone)) setChip("deploys", T("chip_complete"), "done");
-  if (CONFIRMED.wfiActive) setChip("camera", T("cam_on"), "live");
+  if (CONFIRMED.wfiActive) { setChip("camera", T("cam_on"), "live"); fpSet(18); }
+  else if (d >= PLAN.camActive) { setChip("camera", T("cam_exp"), ""); fpSet(18); }
   else if (d >= PLAN.camWake) setChip("camera", T("cam_soon"), "");
-  if (CONFIRMED.wfiActive) fpSet(18);
 }
 function applyStageBoot() {
   // open the roadmap phase we are actually in (phase windows in mission days)
