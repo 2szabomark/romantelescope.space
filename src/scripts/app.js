@@ -33,6 +33,8 @@ var CONFIRMED = {
   hga: true,         // high-gain antenna deployed — NASA blog, Sep 1, 2026
   cover: true,       // aperture cover ("visor") open — NASA blog, Sep 1, 2026
   cgi: true,         // coronagraph powered on 7:27 a.m. EDT — NASA blog, Sep 1, 2026
+  tcm1: true,        // first mid-course correction burn — NASA blog, Aug 31, 2026
+  tcm2: false,       // second trim burn (date not announced)
   wfiActive: false,  // Wide Field Instrument switched on (camera section)
   arrived: false,    // halo-orbit insertion confirmed
   firstImages: false // first public images released
@@ -589,9 +591,17 @@ function nxSet(p) {
   var x = 790 + 70 * Math.cos(a), y = 170 + 120 * Math.sin(a);
   $("nxCraft").setAttribute("transform", "translate(" + x.toFixed(1) + "," + y.toFixed(1) + ")");
 }
-nxSet(1);
+// resting state: live position on the cruise line until arrival, then on the halo
+function nxRest() {
+  nxHalo.style.strokeDashoffset = 0;
+  if (onStation(eDays())) { nxSet(1); return; }
+  var x = 60 + 656 * frac(eDays());
+  $("nxDone").setAttribute("x2", x.toFixed(1));
+  $("nxCraft").setAttribute("transform", "translate(" + x.toFixed(1) + ",170)");
+}
+nxRest();
 $("nxPlay").addEventListener("click", function () {
-  animate(3600, function (k) { nxSet(k); });
+  animate(3600, function (k) { nxSet(k); }, nxRest);
 });
 
 // ---------- auto-play modules once, when scrolled into view ----------
@@ -600,7 +610,7 @@ if (!reduced && "IntersectionObserver" in window) {
   var autos = { launch: function () { animate(6000, function (k) { lnSet(ease(k)); }); },
                 boosters: function () { animate(5200, function (k) { boSet(k); }); },
                 camera: function () { animate(3400, function (k) { fpSet(Math.round(ease(k) * 18)); }); },
-                next: function () { animate(3600, function (k) { nxSet(k); }); } };
+                next: function () { animate(3600, function (k) { nxSet(k); }, nxRest); } };
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (en) {
       if (en.isIntersecting && !played[en.target.id] && autos[en.target.id]) {
@@ -676,6 +686,20 @@ function applyStage() {
   if (CONFIRMED.wfiActive) { setChip("camera", T("cam_on"), "live"); fpSet(18); }
   else if (d >= PLAN.camActive) { setChip("camera", T("cam_exp"), ""); fpSet(18); }
   else if (d >= PLAN.camWake) setChip("camera", T("cam_soon"), "");
+  // what's-next diagram: amber = flown (site convention), dim = still ahead
+  nxBurn("nxTb1Line", "svgTb1w", CONFIRMED.tcm1, T("nx_tb1_done"));
+  nxBurn("nxTb2Line", "svgTb2w", CONFIRMED.tcm2, T("nx_tb2_done"));
+  $("nxBrakeArrow").setAttribute("fill", station ? "#ffb454" : "#3a4877");
+  $("svgBrake").setAttribute("class", station ? "sl sl-amber" : "sl");
+  nxRest();
+}
+function nxBurn(lineId, subId, done, doneText) {
+  $(lineId).setAttribute("stroke", done ? "#ffb454" : "#3a4877");
+  if (done) {
+    var t = $(subId);
+    t.textContent = doneText;
+    t.setAttribute("class", "sl sl-amber");
+  }
 }
 function applyStageBoot() {
   // open the roadmap phase we are actually in (phase windows in mission days)

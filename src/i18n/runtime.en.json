@@ -81,5 +81,7 @@
  "cam_soon": "activation window — per NASA's plan",
  "cam_on": "camera active",
  "nx_c1_arr": "days on station at L2 — arrived around late November",
- "cam_exp": "likely active — per NASA's plan, unconfirmed"
+ "cam_exp": "likely active — per NASA's plan, unconfirmed",
+ "nx_tb1_done": "completed Aug 31",
+ "nx_tb2_done": "completed"
 }
