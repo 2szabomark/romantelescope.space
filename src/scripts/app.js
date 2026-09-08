@@ -400,21 +400,40 @@ function bestDish(t) {
     t.textContent = D.name;
   });
 })();
+// Frame rotated so the anti-solar direction is always +x: Roman stays fixed
+// on the right (inside the canvas — it used to swing off the edge), the night
+// half permanently faces it, and the dishes turn with Earth instead.
+function dsnPt(lon, anti, r) {
+  var a = (lon - anti + 90) * Math.PI / 180;
+  return { x: DCX + r * Math.sin(a), y: DCY - r * Math.cos(a) };
+}
 function dsnTick() {
   var now = Date.now();
   var anti = antiSolarLon(now);
-  // night half faces the anti-solar longitude
-  $("dsnNight").setAttribute("transform", "rotate(" + (anti - 90) + " " + DCX + " " + DCY + ")");
-  // sun arrow on the solar side
-  var sunLon = anti - 180;
-  var sp1 = lonPt(sunLon, DR + 66), sp2 = lonPt(sunLon, DR + 22);
+  // night half: fixed, facing Roman on the right
+  $("dsnNight").setAttribute("transform", "rotate(0 " + DCX + " " + DCY + ")");
+  // sun arrow: fixed on the solar (left) side
   var g = $("dsnSunArrow"); g.innerHTML = "";
-  makeEl("line", { x1: sp1.x, y1: sp1.y, x2: sp2.x, y2: sp2.y, stroke: "#ffdf9e", "stroke-width": 2 }, g);
-  var st = makeEl("text", { x: sp1.x, y: sp1.y - 8, "text-anchor": "middle", "class": "sl" }, g);
+  makeEl("line", { x1: DCX - DR - 66, y1: DCY, x2: DCX - DR - 22, y2: DCY, stroke: "#ffdf9e", "stroke-width": 2 }, g);
+  var st = makeEl("text", { x: DCX - DR - 66, y: DCY - 12, "text-anchor": "middle", "class": "sl" }, g);
   st.textContent = T("w_sun");
-  // Roman sits anti-solar
-  var rp = lonPt(anti, DR + 118);
-  $("dsnRoman").setAttribute("transform", "translate(" + rp.x.toFixed(1) + "," + rp.y.toFixed(1) + ")");
+  // dishes rotate with Earth; labels anchor away from the circle so they
+  // never sit on its edge
+  DISHES.forEach(function (D, i) {
+    var p = dsnPt(D.lon, anti, DR);
+    var grp = $("dish" + i);
+    var c = grp.querySelector("circle");
+    c.setAttribute("cx", p.x.toFixed(1)); c.setAttribute("cy", p.y.toFixed(1));
+    var t = grp.querySelector("text");
+    var side = p.x < DCX - 20 ? "end" : (p.x > DCX + 20 ? "start" : "middle");
+    var lp = dsnPt(D.lon, anti, DR + (side === "middle" ? 34 : 20));
+    t.setAttribute("text-anchor", side);
+    t.setAttribute("x", (side === "start" ? lp.x + 4 : side === "end" ? lp.x - 4 : lp.x).toFixed(1));
+    t.setAttribute("y", (side === "middle" ? lp.y : lp.y + 6).toFixed(1));
+  });
+  // Roman: fixed at the right edge of the canvas
+  var rp = { x: 870, y: DCY };
+  $("dsnRoman").setAttribute("transform", "translate(" + rp.x + "," + rp.y + ")");
   // best dish + beam
   var bi = bestDish(now);
   DISHES.forEach(function (D, i) {
@@ -423,10 +442,10 @@ function dsnTick() {
     c.setAttribute("stroke-width", i === bi ? 3 : 2);
     c.setAttribute("fill", i === bi ? "#2a2008" : "#0c1329");
   });
-  var bp = lonPt(DISHES[bi].lon, DR);
+  var bp = dsnPt(DISHES[bi].lon, anti, DR);
   var beam = $("dsnBeam");
-  beam.setAttribute("x1", bp.x); beam.setAttribute("y1", bp.y);
-  beam.setAttribute("x2", rp.x); beam.setAttribute("y2", rp.y);
+  beam.setAttribute("x1", bp.x.toFixed(1)); beam.setAttribute("y1", bp.y.toFixed(1));
+  beam.setAttribute("x2", rp.x - 18); beam.setAttribute("y2", rp.y);
   $("dsnNow").textContent = DISHES[bi].name;
   // next handover: step forward until the best dish changes
   var nxt = null, who = bi;
