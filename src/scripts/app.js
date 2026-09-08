@@ -482,6 +482,7 @@ function ladderTick(d) {
   var dist = Math.max(0, km(d));
   $("ldCraft").setAttribute("transform", "translate(" + ldX(dist).toFixed(1) + ",130)");
   $("ldGeoX").textContent = (dist / 35786).toFixed(1) + "×";
+  $("ldGone").textContent = fmt(dist);
   $("ldRemain").textContent = fmt(Math.max(0, L2KM - dist));
 }
 
