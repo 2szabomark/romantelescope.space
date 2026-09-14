@@ -41,7 +41,7 @@ var CONFIRMED = {
 };
 var PLAN = {
   deployWindow: 7,   // "within days" — after this the remaining deploys show "expected any day"
-  camWake: 21,       // NASA: WFI activates a few weeks in — chip switches to "activation window"
+  camWake: 14,       // NASA commissioning page: WFI powers on "in a couple of weeks" — chip switches to "activation window"
   camActive: 35,     // end of NASA's "weeks 2-5" window — camera shown as likely active (unconfirmed)
   arrive: 90         // ~90-day cruise — onStation() flips on this date even without confirmation
 };
