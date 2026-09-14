@@ -688,7 +688,15 @@ function applyStage() {
   else if (d >= PLAN.camWake) setChip("camera", T("cam_soon"), "");
   // what's-next diagram: amber = flown (site convention), dim = still ahead
   nxBurn("nxTb1Line", "svgTb1w", CONFIRMED.tcm1, T("nx_tb1_done"));
-  nxBurn("nxTb2Line", "svgTb2w", CONFIRMED.tcm2, T("nx_tb2_done"));
+  // trim burn 2's date is unknown (NASA: a second correction "if needed"), so
+  // it gets no tick on the line until confirmed — a fixed tick would be
+  // overtaken by the live dot and read as missed or already done
+  if (CONFIRMED.tcm2) {
+    $("nxTb2Line").setAttribute("opacity", "1");
+    nxBurn("nxTb2Line", "svgTb2w", true, T("nx_tb2_done"));
+  } else {
+    $("nxTb2Line").setAttribute("opacity", "0");
+  }
   $("nxBrakeArrow").setAttribute("fill", station ? "#ffb454" : "#3a4877");
   $("svgBrake").setAttribute("class", station ? "sl sl-amber" : "sl");
   nxRest();

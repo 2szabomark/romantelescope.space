@@ -65,7 +65,7 @@ async function probe(targetDay, lang) {
     ldRemain: document.getElementById("ldRemain").textContent,
     tb1Stroke: document.getElementById("nxTb1Line").getAttribute("stroke"),
     tb1w: document.getElementById("svgTb1w").textContent,
-    tb2Stroke: document.getElementById("nxTb2Line").getAttribute("stroke"),
+    tb2Op: document.getElementById("nxTb2Line").getAttribute("opacity"),
     brake: document.getElementById("nxBrakeArrow").getAttribute("fill"),
     craft: document.getElementById("nxCraft").getAttribute("transform"),
     dsnNow: document.getElementById("dsnNow").textContent,
@@ -103,7 +103,7 @@ for (const lang of ["", "hu/", "de/", "es/", "zh/"]) {
 const t = await probe(nowDay);
 check("today camera chip matches day", nowDay >= 35 ? /active/.test(t.cameraChip) : nowDay >= 14 ? /activation window/.test(t.cameraChip) : /wakes/.test(t.cameraChip), t.cameraChip);
 check("today tb1 amber + completed", t.tb1Stroke === "#ffb454" && /completed Aug 31/.test(t.tb1w), t.tb1w);
-check("today tb2 + brake match stage", nowDay < 90 ? (t.tb2Stroke === "#3a4877" && t.brake === "#3a4877") : true, t.tb2Stroke + "/" + t.brake);
+check("today tb2 tick hidden while unconfirmed + brake dim", nowDay < 90 ? (t.tb2Op === "0" && t.brake === "#3a4877") : true, "op=" + t.tb2Op + " brake=" + t.brake);
 check("today craft position sane", /translate\(/.test(t.craft), t.craft);
 
 const d20 = await probe(20);
