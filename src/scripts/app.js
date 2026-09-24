@@ -35,7 +35,7 @@ var CONFIRMED = {
   cgi: true,         // coronagraph powered on 7:27 a.m. EDT — NASA blog, Sep 1, 2026
   tcm1: true,        // first mid-course correction burn — NASA blog, Aug 31, 2026
   tcm2: false,       // second trim burn (date not announced)
-  wfiActive: false,  // Wide Field Instrument switched on (camera section)
+  wfiActive: true,   // Wide Field Instrument powered on — NASA blog, Sep 15, 2026
   arrived: false,    // halo-orbit insertion confirmed
   firstImages: false // first public images released
 };

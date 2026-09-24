@@ -101,17 +101,17 @@ for (const lang of ["", "hu/", "de/", "es/", "zh/"]) {
 
 // --- stage behavior at key mission days (English) ---
 const t = await probe(nowDay);
-check("today camera chip matches day", nowDay >= 35 ? /active/.test(t.cameraChip) : nowDay >= 14 ? /activation window/.test(t.cameraChip) : /wakes/.test(t.cameraChip), t.cameraChip);
+check("today camera chip active (WFI confirmed Sep 15)", /active/.test(t.cameraChip), t.cameraChip);
 check("today tb1 amber + completed", t.tb1Stroke === "#ffb454" && /completed Aug 31/.test(t.tb1w), t.tb1w);
 check("today tb2 tick hidden while unconfirmed + brake dim", nowDay < 90 ? (t.tb2Op === "0" && t.brake === "#3a4877") : true, "op=" + t.tb2Op + " brake=" + t.brake);
 check("today craft position sane", /translate\(/.test(t.craft), t.craft);
 
 const d20 = await probe(20);
-check("d20 camera activation window", /activation window/.test(d20.cameraChip), d20.cameraChip);
+check("d20 camera chip active (flag overrides date)", /active/.test(d20.cameraChip), d20.cameraChip);
 check("d20 phase 2 open", d20.openPhase === 1, "open=" + d20.openPhase);
 
 const d40 = await probe(40);
-check("d40 camera likely active", /likely active/.test(d40.cameraChip) && /unconfirmed/.test(d40.cameraChip), d40.cameraChip);
+check("d40 camera chip active", /active/.test(d40.cameraChip), d40.cameraChip);
 check("d40 detectors lit", /18/.test(d40.fpCount), d40.fpCount);
 check("d40 phase 3 open", d40.openPhase === 2, "open=" + d40.openPhase);
 
