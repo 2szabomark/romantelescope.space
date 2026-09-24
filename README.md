@@ -39,3 +39,4 @@ manual: flip the matching flag in `CONFIRMED` at the top of
 `src/scripts/app.js` when the mission blog confirms it, then push —
 every affected module (deploy board, camera section, arrival state)
 updates from that one flag. Planned timings live next to it in `PLAN`.
+Automation note: cloud routine push path verified 2026-09-24.
