@@ -60,6 +60,8 @@ async function probe(targetDay, lang) {
     cameraChip: document.querySelector("#camera .chip").textContent,
     dpDots: [...document.querySelectorAll(".dpitem")].map(b => b.classList.contains("done")).join(","),
     openPhase: [...document.querySelectorAll("#next .steps details")].findIndex(d => d.open),
+    stepTicks: [...document.querySelectorAll("#next .steps details")].map(det =>
+      (det.classList.contains("done") ? "D" : "-") + ":" + [...det.querySelectorAll(".sub li")].map(li => li.classList.contains("done") ? "x" : ".").join("")),
     fpCount: document.getElementById("fpCount").textContent,
     ldGone: document.getElementById("ldGone").textContent,
     ldRemain: document.getElementById("ldRemain").textContent,
@@ -105,6 +107,9 @@ check("today camera chip active (WFI confirmed Sep 15)", /active/.test(t.cameraC
 check("today tb1 amber + completed", t.tb1Stroke === "#ffb454" && /completed Aug 31/.test(t.tb1w), t.tb1w);
 check("today tb2 tick hidden while unconfirmed + brake dim", nowDay < 90 ? (t.tb2Op === "0" && t.brake === "#3a4877") : true, "op=" + t.tb2Op + " brake=" + t.brake);
 check("today craft position sane", /translate\(/.test(t.craft), t.craft);
+check("today roadmap ticks (phase1 all, wfi+readouts, rest pending)",
+  t.stepTicks[0] === "D:xxxx" && t.stepTicks[1] === "-:.xx" && t.stepTicks[2] === "-:..." && t.stepTicks[3] === "-:..." && t.stepTicks[4] === "-:...",
+  JSON.stringify(t.stepTicks));
 
 const d20 = await probe(20);
 check("d20 camera chip active (flag overrides date)", /active/.test(d20.cameraChip), d20.cameraChip);
@@ -122,6 +127,9 @@ check("d95 route chip arrived", /arrived/.test(d95.routeChip), d95.routeChip);
 check("d95 nxDays counts up", parseInt(d95.nxDays) === 5, d95.nxDays);
 check("d95 brake amber + craft on halo", d95.brake === "#ffb454" && parseFloat(d95.craft.match(/translate\(([\d.]+)/)[1]) > 700, d95.brake + " " + d95.craft);
 check("d95 phase 4 open", d95.openPhase === 3, "open=" + d95.openPhase);
+check("d95 roadmap ticks (arrival items done, tcm2 + images pending)",
+  d95.stepTicks[1] === "D:xxx" && d95.stepTicks[2] === "-:x.x" && d95.stepTicks[3] === "D:x.x" && d95.stepTicks[4] === "-:...",
+  JSON.stringify(d95.stepTicks));
 
 const d95hu = await probe(95, "hu/");
 check("d95 hu station line", /állomáshely/.test(d95hu.dayLine), d95hu.dayLine);

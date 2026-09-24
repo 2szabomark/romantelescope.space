@@ -700,6 +700,26 @@ function applyStage() {
   $("nxBrakeArrow").setAttribute("fill", station ? "#ffb454" : "#3a4877");
   $("svgBrake").setAttribute("class", station ? "sl sl-amber" : "sl");
   nxRest();
+  // roadmap ticks: confirmable events follow their CONFIRMED flag; items
+  // marked "standard practice" follow the model's clock; explainers (null)
+  // never tick. One row per phase, one entry per sub-item.
+  var steps = [
+    [CONFIRMED.hga, CONFIRMED.cover, CONFIRMED.cgi, CONFIRMED.tcm1],
+    [d >= 35, CONFIRMED.wfiActive, CONFIRMED.wfiActive && d >= 21],
+    [station, CONFIRMED.tcm2, d >= 75],
+    [station, null, station],
+    [CONFIRMED.firstImages, CONFIRMED.firstImages, null]
+  ];
+  document.querySelectorAll("#next .steps details").forEach(function (det, pi) {
+    var row = steps[pi] || [];
+    var allDone = true;
+    det.querySelectorAll(".sub li").forEach(function (li, si) {
+      var v = row[si];
+      li.classList.toggle("done", v === true);
+      if (v === false) allDone = false;
+    });
+    det.classList.toggle("done", allDone && row.some(function (v) { return v === true; }));
+  });
 }
 function nxBurn(lineId, subId, done, doneText) {
   $(lineId).setAttribute("stroke", done ? "#ffb454" : "#3a4877");
