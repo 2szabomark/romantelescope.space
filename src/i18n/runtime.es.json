@@ -54,7 +54,7 @@
  "p_oss_blurb": "El cuerpo principal al que todo va atornillado, incluido el soporte que mantiene ambos instrumentos alineados con el telescopio. Sus módulos traseros albergan la gestión de energía y datos, seis ruedas de reacción giratorias que apuntan el observatorio, casi una tonelada de propelente y un grabador de 10 terabytes.",
  "p_com_name": "Comunicaciones",
  "p_com_stat": "1,4 TB / día",
- "p_com_blurb": "La antena de alta ganancia en su brazo transmite a casa alrededor de 1,4 terabytes de datos científicos al día — la tasa más alta de cualquier misión astrofísica de la NASA — a través de las antenas de la Red del Espacio Profundo de la siguiente sección. Antenas menores gestionan comandos y seguimiento.",
+ "p_com_blurb": "La antena de alta ganancia en su brazo transmite a casa alrededor de 1,4 terabytes de datos científicos al día — la tasa más alta de cualquier misión astrofísica de la NASA — hacia estaciones terrestres de banda Ka operadas por la NASA, la ESA y la JAXA. Antenas más pequeñas gestionan los comandos y el seguimiento a través de la Red del Espacio Profundo mostrada en la siguiente sección.",
  "d1_n": "Solar Array Sun Shield",
  "d1_w": "30 de ago., T+1 h 23 m",
  "d1_x": "Abierto y generando energía — confirmado la mañana del lanzamiento.",

@@ -54,7 +54,7 @@
  "p_oss_blurb": "Der Hauptkörper, an dem alles montiert ist, samt dem Träger, der beide Instrumente zum Teleskop ausgerichtet hält. Seine hinteren Module enthalten Strom- und Datenverarbeitung, sechs rotierende Reaktionsräder zur Ausrichtung, fast eine Tonne Treibstoff und einen 10-Terabyte-Rekorder.",
  "p_com_name": "Kommunikation",
  "p_com_stat": "1,4 TB / Tag",
- "p_com_blurb": "Die Hochgewinnantenne an ihrem Ausleger funkt täglich rund 1,4 Terabyte Wissenschaftsdaten nach Hause — die höchste Rate aller NASA-Astrophysikmissionen — über die Deep-Space-Network-Antennen im nächsten Abschnitt. Kleinere Antennen übernehmen Kommandos und Tracking.",
+ "p_com_blurb": "Die Hochgewinnantenne an ihrem Ausleger funkt täglich rund 1,4 Terabyte Wissenschaftsdaten nach Hause — die höchste Rate aller NASA-Astrophysikmissionen — zu Ka-Band-Bodenstationen von NASA, ESA und JAXA. Kommandos und Tracking übernehmen kleinere Antennen über das im nächsten Abschnitt gezeigte Deep Space Network.",
  "d1_n": "Solar Array Sun Shield",
  "d1_w": "30. Aug., T+1 h 23 m",
  "d1_x": "Offen und liefert Strom — am Startmorgen bestätigt.",

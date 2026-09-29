@@ -54,7 +54,7 @@
  "p_oss_blurb": "A törzs, amelyre minden más rögzül, benne a hordozóval, amely a két műszert a távcsőhöz igazítva tartja. Hátsó moduljaiban áram- és adatkezelés, hat pörgő lendkerék az irányzáshoz, közel egy tonna hajtóanyag és egy 10 terabájtos rögzítő kapott helyet.",
  "p_com_name": "Kommunikáció",
  "p_com_stat": "1,4 TB / nap",
- "p_com_blurb": "A karján ülő nagy nyereségű antenna naponta kb. 1,4 terabájt tudományos adatot sugároz haza — ez a legnagyobb adatráta a NASA asztrofizikai missziói közül — a következő részben bemutatott mélyűri antennákon át. A kisebb antennák a parancsokat és a követést intézik.",
+ "p_com_blurb": "A karján ülő nagy nyereségű antenna naponta kb. 1,4 terabájt tudományos adatot sugároz haza — ez a legnagyobb adatráta a NASA asztrofizikai missziói közül — a NASA, az ESA és a JAXA Ka-sávú földi állomásaira. A parancsokat és a követést kisebb antennák intézik, a következő szakaszban bemutatott Mélyűri Hálózaton át.",
  "d1_n": "Napelemes napvédő",
  "d1_w": "aug. 30., T+1 ó 23 p",
  "d1_x": "Nyitva és áramot termel — az indulás reggelén megerősítve.",

@@ -54,7 +54,7 @@
  "p_oss_blurb": "The main body everything bolts onto, including the carrier that keeps both instruments aligned with the telescope. Its rear modules hold power and data handling, six spinning reaction wheels that point the observatory, nearly a ton of propellant, and a 10-terabyte recorder.",
  "p_com_name": "Communications",
  "p_com_stat": "1.4 TB / day",
- "p_com_blurb": "The high-gain antenna on its boom streams about 1.4 terabytes of science data home every day — the highest rate of any NASA astrophysics mission — through the Deep Space Network dishes in the next section. Smaller antennas handle commands and tracking.",
+ "p_com_blurb": "The high-gain antenna on its boom streams about 1.4 terabytes of science data home every day — the highest rate of any NASA astrophysics mission — to Ka-band ground stations run by NASA, ESA, and JAXA. Smaller antennas handle commands and tracking through the Deep Space Network dishes in the next section.",
  "d1_n": "Solar Array Sun Shield",
  "d1_w": "Aug 30, T+1 h 23 m",
  "d1_x": "Open and generating power — confirmed on launch morning.",

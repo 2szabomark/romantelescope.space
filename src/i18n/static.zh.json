@@ -52,7 +52,7 @@
  "an_howto": "图像：<b>NASA 戈达德太空飞行中心</b>——渲染图、视角与热区几何均来自官方交互页 <a href=\"https://science.nasa.gov/mission/roman-space-telescope/explore-roman/\" target=\"_blank\" rel=\"noopener\">Explore the Roman Observatory</a>（<a href=\"https://roman.gsfc.nasa.gov/interactive/\" target=\"_blank\" rel=\"noopener\">roman.gsfc.nasa.gov</a>），那里还介绍了地面系统。",
  "ds_h2": "此刻谁在收听？",
  "chip_estl": "实时估算",
- "ds_lead": "罗曼通过 NASA 深空网络通信——位于<b>堪培拉、马德里和戈德斯通</b>附近的巨型天线。随着地球自转，信号大约每八小时在天线间交接一次。",
+ "ds_lead": "罗曼的指令与遥测通过 NASA 深空网络传输——位于<b>堪培拉、马德里和戈德斯通</b>附近的巨型天线随地球自转依次接力。而每天 1.4 TB 的科学数据洪流将从 2027 年初起拥有自己的三座 Ka 波段地面站：来自 <b>NASA、ESA 和 JAXA</b>——9 月 25 日三座已全部通过就绪测试。",
  "ds_howto": "看图方法：阴影的一半是地球的夜面。L2 位于太阳的反方向，因此<b>当前处于夜晚</b>的那座天线视野最佳——波束就交给它。这是<b>几何估算</b>，不是官方排班。",
  "ds_earth": "地球，从北极上空俯视",
  "ds_c1": "此刻与罗曼通信条件最佳",
@@ -144,7 +144,7 @@
  "so_yt": "戈达德的视频",
  "so_blog": "确认消息最先发布在这里",
  "so_home": "任务主页",
- "f_p1": "<b>哪些是实测、哪些是模型：</b>发射时间、最初 91 分钟的事件时刻、展开确认、DSN 站点列表、仪器参数及所有日期均来自 NASA。罗曼当前的距离、速度、信号延迟以及“谁在收听”的判断均为估算——在约 90 天航程上采用简化减速模型，加上简单的地球自转几何，全部锚定于真实发射时钟（2026 年 8 月 30 日 11:26 UTC）。NASA 自己的口径在抵达时间上并不一致：其 X 帖子称约一个月抵达目的地，新闻稿则称三个月进入最终轨道——本页按新闻稿的数字建模。",
+ "f_p1": "<b>哪些是实测、哪些是模型：</b>发射时间、最初 91 分钟的事件时刻、展开确认、地面站列表、仪器参数及所有日期均来自 NASA。罗曼当前的距离、速度、信号延迟以及“谁在收听”的判断均为估算——在约 90 天航程上采用简化减速模型，加上简单的地球自转几何，全部锚定于真实发射时钟（2026 年 8 月 30 日 11:26 UTC）。NASA 自己的口径在抵达时间上并不一致：其 X 帖子称约一个月抵达目的地，新闻稿则称三个月进入最终轨道——本页按新闻稿的数字建模。",
  "f_p2": "<b>来源：</b>NASA 的发射新闻稿与 science.nasa.gov 上的罗曼任务页面，以及 NASA 戈达德的罗曼天文台导览。天文台示意图是对官方交互页 <a href=\"https://science.nasa.gov/mission/roman-space-telescope/explore-roman/\" target=\"_blank\" rel=\"noopener\">Explore the Roman Observatory</a> 的风格化重建；天文台图像由 NASA/GSFC 提供。里程碑确认最先发布于<a href=\"https://science.nasa.gov/blogs/roman/\" target=\"_blank\" rel=\"noopener\">罗曼任务博客</a>；任务主页：<a href=\"https://science.nasa.gov/mission/roman-space-telescope/\" target=\"_blank\" rel=\"noopener\">science.nasa.gov</a>。",
  "f_p3": "制作于 2026 年 8 月 31 日。",
  "hf_c0": "公里——发射以来已飞行的距离"
